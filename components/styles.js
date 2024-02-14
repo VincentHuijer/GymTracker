@@ -22,7 +22,7 @@ export const StyledContainer = styled.View`
   padding: 25px;
   padding-top: ${StatusBarHeight +10}px;
   background-color: ${primary};
-`
+`;
 
 export const InnerContainer = styled.View`
   flex: 1;
@@ -86,7 +86,7 @@ export const RightIcon = styled.TouchableOpacity`
   top: 38px;
   position: absolute;
   z-index: 1;
-`
+`;
 
 export const StyledButton= styled.TouchableOpacity`
   padding: 15px;
@@ -95,4 +95,9 @@ export const StyledButton= styled.TouchableOpacity`
   border-radius: 5px;
   margin-vertical: 5px;
   height: 60px;
+`;
+
+export const ButtonText = styled.Text`
+  color: ${primary};
+  font-size: 16px;
 `
