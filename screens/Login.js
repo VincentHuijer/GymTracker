@@ -9,15 +9,23 @@ import {
   StyledInputLabel,
   StyledTextInput,
   RightIcon,
-  Colors
+  StyledButton,
+  ButtonText,
+  Colors,
+  MsgBox,
+  Line,
+  ExtraView,
+  ExtraText,
+  TextLinkContent,
+  TextLink
 } from './../components/styles';
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from 'formik';
 import { View } from "react-native";
-import {Octicons, Ionicons} from '@expo/vector-icons';
+import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
 
-const {brand, darkLight} = Colors;
+const {brand, darkLight, primary} = Colors;
 
 const Login = () => {
 
@@ -30,9 +38,6 @@ const Login = () => {
         <PageLogo resizeMode="cover" source={require('./../assets/flexer.png')}/>
         <PageTitle> Vincent Gym </PageTitle>
         <SubTitle> Account Login </SubTitle>
-        
-       
-
         <Formik
           initialValues = {{ email: '', password: '' }}
           onSubmit = {(values) => { 
@@ -51,7 +56,6 @@ const Login = () => {
                 value={values.email}
                 keyboardType="email-address"
               />
-
               <MyTextInput
                 label="Password"
                 icon="lock"
@@ -65,7 +69,23 @@ const Login = () => {
                 hidePassword={hidePassword}
                 setHidePassword={setHidePassword}
               />
-              
+
+              <MsgBox>...</MsgBox>
+              <StyledButton onPress={handleSubmit}>
+                <ButtonText>Login</ButtonText>
+              </StyledButton>
+              <Line/>
+              <StyledButton google={true} onPress={handleSubmit}>
+                <Fontisto name="google" color={primary} size={25}/>
+                <ButtonText google={true}>Sign in with Google</ButtonText>
+              </StyledButton>
+
+              <ExtraView>
+                <ExtraText>Don't have an account already?</ExtraText>
+                <TextLink>
+                  <TextLinkContent> Signup</TextLinkContent>
+                </TextLink>
+              </ExtraView>
             </StyledFormArea>
           )}
         </Formik>
