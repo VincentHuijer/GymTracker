@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'; //needs 'native' part unlike the tutorial
 // import React from 'react';
-import { View, Text, Image } from 'react-native'; //doesnt seem to be used in tutorial
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native'; //doesnt seem to be used in tutorial
 import Constants  from 'expo-constants';
 
 const StatusBarHeight = Constants.StatusBarHeight; //Constants.StatusBarHeight;
@@ -42,3 +42,57 @@ export const PageTitle = styled.Text`
   color: ${brand};
   padding: 10px;
 `;
+
+export const SubTitle = styled.Text`
+  font-size: 18px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: ${tertiary};
+`;
+
+export const StyledFormArea = styled.View`
+  width: 90%
+`;
+
+export const StyledTextInput = styled.TextInput`
+  background-color: ${secondary};
+  padding: 15px;
+  padding-left: 55px;
+  padding-right: 55px;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 60px;
+  margin-vertical: 3px;
+  margin-bottom: 10px;
+  color: ${tertiary};
+`;
+
+export const StyledInputLabel = styled.Text`
+  color: ${tertiary};
+  font-size: 13px;
+  text-align: left;
+`;
+
+export const LeftIcon = styled.View`
+  left: 15px;
+  top: 38px;
+  position: absolute;
+  z-index: 1;
+`;
+
+export const RightIcon = styled.TouchableOpacity`
+  left: 15px;
+  top: 38px;
+  position: absolute;
+  z-index: 1;
+`
+
+export const StyledButton= styled.TouchableOpacity`
+  padding: 15px;
+  background-color: ${brand};
+  justify-content: center;
+  border-radius: 5px;
+  margin-vertical: 5px;
+  height: 60px;
+`
