@@ -1,8 +1,9 @@
-import styled from 'styled-components';
-import {View, Text, Image} from 'react-native'
-import { Constants } from 'expo-constants';
+import styled from 'styled-components/native'; //needs 'native' part unlike the tutorial
+// import React from 'react';
+import { View, Text, Image } from 'react-native'; //doesnt seem to be used in tutorial
+import Constants  from 'expo-constants';
 
-const StatusBarHeight = Constants.StatusBarHeight;
+const StatusBarHeight = Constants.StatusBarHeight; //Constants.StatusBarHeight;
 
 export const Colors = {
   primary: "#ffffff",
@@ -16,7 +17,7 @@ export const Colors = {
 
 const {primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
 
-export const styledContainer = styled.View`
+export const StyledContainer = styled.View`
   flex: 1;
   padding: 25px;
   padding-top: ${StatusBarHeight +10}px;
@@ -35,7 +36,7 @@ export const PageLogo = styled.Image`
 `;
 
 export const PageTitle = styled.Text`
-  font-size: 30px
+  font-size: 30px;
   text-align: center;
   font-weight: bold;
   color: ${brand};
