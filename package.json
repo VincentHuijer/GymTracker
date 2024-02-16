@@ -6,7 +6,9 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:tailwind": "tailwindcss --input input.css --output tailwind.css --no-autoprefixer && tailwind-rn",
+    "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\""
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.1.3",
@@ -15,19 +17,26 @@
     "@react-navigation/native": "^6.1.10",
     "constants": "^0.0.2",
     "expo": "~50.0.6",
+    "expo-calendar": "~12.2.1",
     "expo-constants": "~15.4.5",
     "expo-status-bar": "~1.11.1",
     "formik": "^2.4.5",
+    "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.73.4",
+    "react-native-svg": "14.1.0",
     "react-native-web": "~0.19.6",
     "styled-components": "^6.1.8",
-    "react-native-svg": "14.1.0"
+    "tailwind-rn": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "tailwindcss": "^3.4.1"
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "concurrently": "^8.2.2",
+    "postcss": "^8.4.35",
+    "tailwindcss": "3.3.2"
   },
   "private": true
 }
