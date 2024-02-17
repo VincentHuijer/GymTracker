@@ -20,29 +20,41 @@ import ProgressScreen from './screens/ProgressScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
 import CreateWorkoutsScreen from './screens/workoutScreens/CreateWorkoutsScreen';
+import CreateSplitsScreen from './screens/workoutScreens/CreateSplitsScreen';
 
 const WorkoutsStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 const Tab = createBottomTabNavigator(); //bottm navbar
 
 const WorkoutsNavigator = () => (
-  <WorkoutsStack.Navigator>
+  <WorkoutsStack.Navigator screenOptions={{ contentStyle: {backgroundColor: '#1C1C1E'}}}>
     <WorkoutsStack.Screen name="Workouts" component={WorkoutsScreen}  options={{ headerShown: false }}/>
     <WorkoutsStack.Screen name="CreateWorkouts" component={CreateWorkoutsScreen} options={{ headerShown: false }} />
+    <WorkoutsStack.Screen name="CreateSplits" component={CreateSplitsScreen} options={{ headerShown: false }} />
   </WorkoutsStack.Navigator>
+);
+
+const ProfileNavigator = () => (
+  <ProfileStack.Navigator screenOptions={{ contentStyle: {backgroundColor: '#1C1C1E'}}}>
+    <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
+    <ProfileStack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+    <ProfileStack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+    <ProfileStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+  </ProfileStack.Navigator>
 );
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator >
         <Tab.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <HomeTabIcon color={color} size={size} />
-              ),
-            }}
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <HomeTabIcon color={color} size={size} />
+            ),
+          }}
         />
         <Tab.Screen
             name="Calendar"
@@ -55,7 +67,7 @@ export default function App() {
         />
          <Tab.Screen
         name="Workout"
-        component={WorkoutsNavigator} // Use the nested navigator for "Workout"
+        component={WorkoutsNavigator} 
         options={{
           tabBarIcon: ({ color, size }) => (
             <WorkoutsTabIcon color={color} size={size} />
@@ -73,7 +85,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Profile"
-          component={ProfileScreen}
+          component={ProfileNavigator}
           options={{
             tabBarIcon: ({ color, size }) => (
               <ProfileTabIcon color={color} size={size} />

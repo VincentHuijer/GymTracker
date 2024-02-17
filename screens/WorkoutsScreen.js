@@ -5,22 +5,23 @@ import { useNavigation } from '@react-navigation/native';
 const WorkoutsScreen = () => {
   const navigation = useNavigation();
 
-  const navigateToCreateWorkouts = () => {
-    navigation.navigate('CreateWorkouts');
-  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.box} onPress={navigateToCreateWorkouts}>
+      <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('CreateWorkouts')}>
         <Text style={styles.text}>Create Workout</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.box}>
+      <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('CreateSplits')}>
         <Text style={styles.text}>Create Split</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.box}>
         <Text style={styles.text}>Edit Workout</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.box}>
+        <Text style={styles.text}>Add Workout to split</Text>
       </TouchableOpacity>
     </View>
   );
@@ -30,16 +31,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#1C1C1E'
+    backgroundColor: '#1C1C1E',
+    paddingTop: 20// only great until custom splits get added
   },
   box: {
     backgroundColor: 'white',
-    paddingVertical: 30,
-    paddingHorizontal: 20,
-    margin: 10,
-    borderRadius: 10,
-    elevation: 3,
+    paddingVertical: 15,
+    margin: 20,
+    borderRadius: 10, //edges on borders
+    width: '80%',
+    alignItems: 'center', //horizontally
   },
   text: {
     fontSize: 18,
