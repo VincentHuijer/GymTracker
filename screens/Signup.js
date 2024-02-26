@@ -24,6 +24,7 @@ import { StatusBar } from "expo-status-bar";
 import { Formik } from 'formik';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -31,6 +32,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 const {brand, darkLight, primary} = Colors;
 
 const Signup = () => {
+  const navigation = useNavigation();
+
   const [hidePassword, setHidePassword] = useState(true);
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date(2000, 0, 1));
@@ -50,7 +53,7 @@ const Signup = () => {
 
   return (
     
-    <StyledContainer>
+  <StyledContainer style={{ backgroundColor: '#1C1C1E'}}>
     <StatusBar style="dark"/>
       <InnerContainer>
         {/* <PageLogo resizeMode="cover" source={require('./../assets/flexer.png')}/> */}
@@ -142,7 +145,7 @@ const Signup = () => {
 
               <ExtraView>
                 <ExtraText>Already have an account?</ExtraText>
-                <TextLink>
+                <TextLink onPress={() => navigation.navigate('Login')}>
                   <TextLinkContent> Login</TextLinkContent>
                 </TextLink>
               </ExtraView>

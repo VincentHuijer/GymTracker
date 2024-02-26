@@ -30,10 +30,12 @@ const {brand, darkLight, primary, white} = Colors;
 
 const Login = ({ setUserAuthenticated }) => {
 
+  const navigation = useNavigation();
   const [hidePassword, setHidePassword] = useState(true);
   // const navigation = useNavigation();
 
   return (
+
     <StyledContainer style={{ backgroundColor: '#1C1C1E'}}>
     <StatusBar style="dark"/>
       <InnerContainer>
@@ -90,7 +92,7 @@ const Login = ({ setUserAuthenticated }) => {
 
               <ExtraView>
                 <ExtraText>Don't have an account already?</ExtraText>
-                <TextLink>
+                <TextLink onPress={() => navigation.navigate('Signup')}>
                   <TextLinkContent> Signup</TextLinkContent>
                 </TextLink>
               </ExtraView>
