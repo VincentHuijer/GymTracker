@@ -22,26 +22,34 @@ import {
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from 'formik';
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-const {brand, darkLight, primary} = Colors;
+const {brand, darkLight, primary, white} = Colors;
 
-const Login = () => {
+const Login = ({ setUserAuthenticated }) => {
 
   const [hidePassword, setHidePassword] = useState(true);
+  // const navigation = useNavigation();
 
   return (
-    <StyledContainer>
+    <StyledContainer style={{ backgroundColor: '#1C1C1E'}}>
     <StatusBar style="dark"/>
       <InnerContainer>
-        <PageLogo resizeMode="cover" source={require('./../assets/flexer.png')}/>
+        <PageLogo resizeMode="cover" source={require('./../assets/flexer.png')} style={{marginTop: 50}} />
         <PageTitle> Vincent Gym </PageTitle>
         <SubTitle> Account Login </SubTitle>
         <Formik
           initialValues = {{ email: '', password: '' }}
           onSubmit = {(values) => { 
+
             console.log(values);
+
+            console.log('b4 authenticate:', setUserAuthenticated)
+            setUserAuthenticated(true); //In React, state is not mutated directly. Instead you use state update functions. (setUserAuthenticated = true;) is not correct because its a function and not a variable
+            console.log('user is authenticated:', setUserAuthenticated)
+            // navigation.navigate('Home')
           }}
         >
           {({handleChange, handleBlur, handleSubmit, values}) => (
@@ -111,5 +119,8 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
     </View>
   )
 }
+
+
+
 
 export default Login;

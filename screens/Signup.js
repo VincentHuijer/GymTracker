@@ -22,7 +22,7 @@ import {
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from 'formik';
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
 
 
@@ -49,6 +49,7 @@ const Signup = () => {
   }
 
   return (
+    
     <StyledContainer>
     <StatusBar style="dark"/>
       <InnerContainer>
@@ -177,5 +178,9 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
     </View>
   )
 }
+
+// const styles = StyleSheet.create({
+//   backgroundColor: '#1C1C1E',
+// });
 
 export default Signup;

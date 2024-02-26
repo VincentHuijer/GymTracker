@@ -12,10 +12,11 @@ export const Colors = {
   darkLight: "#9CA3AF",
   brand: "#2CB3FC",
   green: "#10b981",
-  red: "#EF4444"
+  red: "#EF4444",
+  white: "#FFFFFF"
 };
 
-const {primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
+const {primary, secondary, tertiary, darkLight, brand, green, red, white } = Colors;
 
 export const StyledContainer = styled.View`
   flex: 1;
@@ -61,7 +62,7 @@ export const PageTitle = styled.Text`
   font-size: 30px;
   text-align: center;
   font-weight: bold;
-  color: ${brand};
+  color: ${white};
   padding: 10px;
 
   ${(props) => props.welcome && `
@@ -74,7 +75,7 @@ export const SubTitle = styled.Text`
   margin-bottom: 20px;
   letter-spacing: 1px;
   font-weight: bold;
-  color: ${tertiary};
+  color: ${white};
 
   ${(props) => props.welcome && `
     margin-bottom: 5px;
@@ -166,7 +167,7 @@ export const ExtraView = styled.View`
 export const ExtraText = styled.Text`
   justify-content: center;
   align-content: center;
-  color: ${tertiary};
+  color: ${white};
   font-size: 15px;
 `;
 

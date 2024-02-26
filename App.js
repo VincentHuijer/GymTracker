@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -22,9 +22,14 @@ import ProfileScreen from './screens/ProfileScreen';
 import CreateWorkoutsScreen from './screens/workoutScreens/CreateWorkoutsScreen';
 import CreateSplitsScreen from './screens/workoutScreens/CreateSplitsScreen';
 
+//scripts
+import AuthContext from './scripts/AuthContext';
+
 const WorkoutsStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
-const Tab = createBottomTabNavigator(); //bottm navbar
+const AuthStack = createStackNavigator();
+
+const Tab = createBottomTabNavigator(); //bottom navbar
 
 const WorkoutsNavigator = () => (
   <WorkoutsStack.Navigator screenOptions={{ contentStyle: {backgroundColor: '#1C1C1E'}}}>
@@ -43,9 +48,23 @@ const ProfileNavigator = () => (
   </ProfileStack.Navigator>
 );
 
-export default function App() {
+const AuthNavigator = ({setUserAuthenticated}) => (
+  <AuthStack.Navigator screenOptions={{ contentStyle: { backgroundColor: '#1C1C1E' } }}>
+    <ProfileStack.Screen name="Login">
+      {(props) => <Login {...props} setUserAuthenticated={setUserAuthenticated} />}
+    </ProfileStack.Screen>
+    <ProfileStack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+    <ProfileStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+    <ProfileStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+  </AuthStack.Navigator>
+);
+
+const MainNavigator = () => {
+  const [userAuthenticated, setUserAuthenticated] = useState(false);
+
   return (
     <NavigationContainer>
+      {userAuthenticated ? (
       <Tab.Navigator >
         <Tab.Screen
           name="Home"
@@ -65,7 +84,7 @@ export default function App() {
               ),
             }}
         />
-         <Tab.Screen
+        <Tab.Screen
         name="Workout"
         component={WorkoutsNavigator} 
         options={{
@@ -92,8 +111,16 @@ export default function App() {
             ),
           }}
         />
-      </Tab.Navigator>
+      </Tab.Navigator>) : (
+      
+        <AuthNavigator setUserAuthenticated={setUserAuthenticated} />
+      )}
     </NavigationContainer>
+  );
+};
 
-    );
+
+export default function App() {
+  return <MainNavigator />;
 }
+  
