@@ -10,24 +10,28 @@ const MyWorkoutsScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.box}>
-        <LegPressIcon style={{ width: 40, height: 40, marginBottom: 2 }} />
-        <Text style={styles.text}>Armknijper</Text>
+        <View style={{ flexDirection: 'row',  marginLeft: 20,}}>
+          <LegPressIcon style={{ width: 40, height: 40, marginBottom: 2}} />
+          <Text style={[styles.text, {alignSelf: 'center', marginLeft: 10}]}>Beentjes</Text>
+        </View>
       </TouchableOpacity>
-
       <TouchableOpacity style={styles.box}>
-        <MuscleIcon style={{ width: 40, height: 40, marginBottom: 2 }} />
-        <Text style={styles.text}>Armknijper</Text>
+        <View style={{ flexDirection: 'row',  marginLeft: 20,}}>
+          <MuscleIcon style={{ width: 40, height: 40, marginBottom: 2}} />
+          <Text style={[styles.text, {alignSelf: 'center', marginLeft: 10}]}>Armknijper</Text>
+        </View>
       </TouchableOpacity>
-
       <TouchableOpacity style={styles.box}>
-        <PullIcon style={{ width: 40, height: 40, marginBottom: 2 }} />
-        <Text style={styles.text}>Hard trekken</Text>
+        <View style={{ flexDirection: 'row',  marginLeft: 20,}}>
+          <PullIcon style={{ width: 40, height: 40, marginBottom: 2}} />
+          <Text style={[styles.text, {alignSelf: 'center', marginLeft: 10}]}>Hard trekken</Text>
+        </View>
       </TouchableOpacity>
-
-
       <TouchableOpacity style={styles.box}>
-        <PushIcon style={{ width: 40, height: 40, marginBottom: 2 }} />
-        <Text style={styles.text}>Hard duwen</Text>
+        <View style={{ flexDirection: 'row',  marginLeft: 20,}}>
+          <PushIcon style={{ width: 40, height: 40, marginBottom: 2}} />
+          <Text style={[styles.text, {alignSelf: 'center', marginLeft: 10}]}>Hard duwen</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
