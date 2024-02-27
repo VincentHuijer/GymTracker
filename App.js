@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { HomeTabIcon, CalendarTabIcon, WorkoutsTabIcon, ProgressTabIcon, ProfileTabIcon } from './assets/SvgIcons';
+import { HomeTabIcon, CalendarTabIcon, WorkoutsTabIconDumbell, ProgressTabIcon, ProfileTabIcon } from './assets/SvgIcons';
 
 //login screens
 import Signup from './screens/Signup';
@@ -21,14 +21,14 @@ import ProfileScreen from './screens/ProfileScreen';
 
 import CreateWorkoutsScreen from './screens/workoutScreens/CreateWorkoutsScreen';
 import CreateSplitsScreen from './screens/workoutScreens/CreateSplitsScreen';
+import MyWorkoutsScreen from './screens/workoutScreens/MyWorkouts';
 
 //scripts
-import AuthContext from './scripts/AuthContext';
 
 const WorkoutsStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const AuthStack = createStackNavigator();
-
+const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator(); //bottom navbar
 
 const WorkoutsNavigator = () => (
@@ -36,6 +36,7 @@ const WorkoutsNavigator = () => (
     <WorkoutsStack.Screen name="Workouts" component={WorkoutsScreen}  options={{ headerShown: false }}/>
     <WorkoutsStack.Screen name="CreateWorkouts" component={CreateWorkoutsScreen} options={{ headerShown: false }} />
     <WorkoutsStack.Screen name="CreateSplits" component={CreateSplitsScreen} options={{ headerShown: false }} />
+    <WorkoutsStack.Screen name="MyWorkouts" component={MyWorkoutsScreen} options={{ headerShown: false }} />
   </WorkoutsStack.Navigator>
 );
 
@@ -59,6 +60,14 @@ const AuthNavigator = ({setUserAuthenticated}) => (
   </AuthStack.Navigator>
 );
 
+const HomeNavigator = () => (
+  <HomeStack.Navigator screenOptions={{ contentStyle: { backgroundColor: '#1C1C1E' } }}>
+    <ProfileStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+    <ProfileStack.Screen name="MyWorkouts" component={MyWorkoutsScreen} options={{ headerShown: false }}/>
+  </HomeStack.Navigator>
+);
+
+
 const MainNavigator = () => {
   const [userAuthenticated, setUserAuthenticated] = useState(true); /* should be false but i dont wanna log in each time useState(false);*/
 
@@ -67,8 +76,8 @@ const MainNavigator = () => {
       {userAuthenticated ? (
       <Tab.Navigator >
         <Tab.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Homepage"
+          component={HomeNavigator}
           options={{
             tabBarIcon: ({ color, size }) => (
               <HomeTabIcon color={color} size={size} />
@@ -89,7 +98,7 @@ const MainNavigator = () => {
         component={WorkoutsNavigator} 
         options={{
           tabBarIcon: ({ color, size }) => (
-            <WorkoutsTabIcon color={color} size={size} />
+            <WorkoutsTabIconDumbell color={color} size={size} />
           ),
         }}
       />
@@ -98,7 +107,7 @@ const MainNavigator = () => {
           component={ProgressScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <ProgressTabIcon color={color} size={size} />
+              <ProgressTabIcon color={color} size={size}/>
             ),
           }}
         />
