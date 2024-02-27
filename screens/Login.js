@@ -35,8 +35,7 @@ const Login = ({ setUserAuthenticated }) => {
   // const navigation = useNavigation();
 
   return (
-
-    <StyledContainer style={{ backgroundColor: '#1C1C1E'}}>
+  <StyledContainer>
     <StatusBar style="dark"/>
       <InnerContainer>
         <PageLogo resizeMode="cover" source={require('./../assets/flexer.png')} style={{marginTop: 50}} />

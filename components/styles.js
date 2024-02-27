@@ -13,16 +13,17 @@ export const Colors = {
   brand: "#2CB3FC",
   green: "#10b981",
   red: "#EF4444",
-  white: "#FFFFFF"
+  white: "#FFFFFF",
+  backgroundBlack: "#1C1C1E"
 };
 
-const {primary, secondary, tertiary, darkLight, brand, green, red, white } = Colors;
+const {primary, secondary, tertiary, darkLight, brand, green, red, white, backgroundBlack } = Colors;
 
 export const StyledContainer = styled.View`
   flex: 1;
   padding: 25px;
   padding-top: ${StatusBarHeight +10}px;
-  background-color: ${primary};
+  background-color: ${backgroundBlack};
 `;
 
 export const InnerContainer = styled.View`
