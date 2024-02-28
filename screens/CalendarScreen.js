@@ -1,43 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button } from 'react-native';
-import * as Calendar from 'expo-calendar';
+import {Calendar, LocaleConfig} from 'react-native-calendars';
 
 const CalendarScreen = () => {
-  const [calendarPermission, setCalendarPermission] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Calendar.requestCalendarPermissionsAsync();
-      setCalendarPermission(status === 'granted');
-    })();
-  }, []);
-
-  const handleAddEventToCalendar = async () => {
-    if (!calendarPermission) {
-      // Handle permission not granted
-      return;
-    }
-
-    const defaultCalendar = await Calendar.getDefaultCalendarAsync();
-
-    const eventDetails = {
-      title: 'My Event',
-      startDate: new Date(), // Set your start date
-      endDate: new Date(),   // Set your end date
-      timeZone: 'GMT+00:00', // Set your time zone
-      location: 'Event Location',
-      notes: 'Event Notes',
-    };
-
-    await Calendar.createEventAsync(defaultCalendar.id, eventDetails);
-  };
+  const [selected, setSelected] = useState('');
 
   return (
-    <View>
-      <Text>Calendar</Text>
-      <Button title="Add Event to Calendar" onPress={handleAddEventToCalendar} />
-    </View>
-  );
+    <Calendar
+    onDayPress={day => {
+      setSelected(day.dateString);
+    }}
+    markedDates={{
+      [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'},
+      '2024-02-15': {marked: true, dotColor: '#50cebb'},
+      '2024-02-12': {marked: true, selectedColor: 'blue'},
+      '2024-02-16': {marked: true, selectedColor: 'green'},
+      '2024-02-21': {marked: true, selectedColor: 'blue'},
+      '2024-02-21': {marked: true, selectedColor: 'red'}
+    }}
+  />
+);
 };
 
 export default CalendarScreen;
