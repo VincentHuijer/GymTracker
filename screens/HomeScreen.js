@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { BalanceScaleIcon, DietGraneIcon, HistoryRepeatIcon, WorkoutsTabIconDumbell } from '../assets/SvgIcons';
+import { BalanceScaleIcon, CopyIcon, DietGraneIcon, HistoryRepeatIcon, PlusIcon, WorkoutsTabIconDumbell } from '../assets/SvgIcons';
 import dumbellIcon from '../assets/dumbbellIcon.png';
 import { useNavigation } from '@react-navigation/native';
 
@@ -31,7 +31,8 @@ const HomeScreen = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#1C1C1E' }}>{/* In React Native, the flex property is used to define how a component should grow in relation to its siblings within a flex container. Setting flex: 1 on a component makes it take up all the available space along the main axis of its container. */}
-      <View style={{ backgroundColor: '#343438', padding: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 100}}>
+      <View style={{ backgroundColor: '#343438', padding: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 15}}>
+      <Text style={{ color: 'white', fontSize: 'large', fontWeight: '400'}}> Workouts </Text>
         <View style={{ flex: 1,  padding: 20 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             {daysOfWeek.map((day, index) => (
@@ -45,8 +46,7 @@ const HomeScreen = () => {
                   alignItems: 'center',
                   marginHorizontal: 10,
                   justifyContent: 'center',
-                  // borderWidth: index === currentDayIndex ? 2 : 0,
-                  // borderColor: 'white',
+                  
 
                 }}
               >
@@ -59,7 +59,26 @@ const HomeScreen = () => {
       </View>
 
       <View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 70, marginBottom: 20, alignContent: 'center'}}>
+        <View style={{flex: 1, justifyContent: 'center', paddingHorizontal: 68, marginBottom: 15}}>
+          <TouchableOpacity onPress={() => navigation.navigate('MyWorkouts')}>
+            <View style={{backgroundColor: 'white',  paddingVertical: 40, paddingHorizontal: 24, borderRadius: 9}}>
+              <Text style={{  color: 'black', textAlign: 'center', fontSize: 30, fontWeight: 400, marginBottom: 25}}>No workout</Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between',  alignContent: 'center'}}>
+                <View style={{alignItems:'center'}}>
+                  <CopyIcon/>
+                  <Text>Copy Workout</Text>
+                </View>
+                <View style={{alignItems:'center'}}>
+                  <PlusIcon/>
+                <Text>New Workout</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 70, marginBottom: 15, alignContent: 'center'}}>
           <TouchableOpacity onPress={() => navigation.navigate('Weight')}>
             <View style={{backgroundColor: 'white',  paddingVertical: 40, paddingHorizontal: 31, borderRadius: 9}}>
               <View style={{alignItems: 'center'}}> {/*icon didnt wanna go to the center for some reason*/}

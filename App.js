@@ -76,7 +76,7 @@ const MainNavigator = () => {
       {userAuthenticated ? (
       <Tab.Navigator >
         <Tab.Screen
-          name="Homepage"
+          name="Home"
           component={HomeNavigator}
           options={{
             tabBarIcon: ({ color, size }) => (
