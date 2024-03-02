@@ -11,7 +11,7 @@ const ExerciseComponent = () => {
     <TouchableOpacity style={{backgroundColor: '#252429', paddingVertical: 15,margin: 20,borderRadius: 10,width: '80%',alignItems: 'center', /*horizontally*/}} onPress={() => navigation.navigate('NonGenericWorkout')}>
       <View style={{ flexDirection: 'row', marginLeft: 20,}}>
       <ItemBox>
-      <PushIcon color='white' style={{ width: 40, height: 40, marginBottom: 2, fill: 'white'}} />
+      <PushIcon color='white'/>
       </ItemBox>
         <Text style={[{alignSelf: 'center', marginHorizontal: 40, fontSize: 18, color: 'white', fontWeight:'bold'}]}>GenericExercise</Text>
         <PlusButton/>

@@ -13,7 +13,9 @@ const ItemBox = ({ children }) => {
         padding: 4,
       }}
     >
-      {children}
+      <View style={{flex: 1}}>
+        {children}
+      </View>
     </View>
   );
 }
