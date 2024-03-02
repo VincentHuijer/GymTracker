@@ -22,6 +22,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import CreateWorkoutsScreen from './screens/workoutScreens/CreateWorkoutsScreen';
 import CreateSplitsScreen from './screens/workoutScreens/CreateSplitsScreen';
 import MyWorkoutsScreen from './screens/workoutScreens/MyWorkouts';
+import NonGenericWorkout from './screens/workoutScreens/NonGenericWorkout';
 
 //scripts
 
@@ -64,6 +65,8 @@ const HomeNavigator = () => (
   <HomeStack.Navigator screenOptions={{ contentStyle: { backgroundColor: '#1C1C1E' } }}>
     <ProfileStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
     <ProfileStack.Screen name="MyWorkouts" component={MyWorkoutsScreen} options={{ headerShown: false }}/>
+    <ProfileStack.Screen name="NonGenericWorkout" component={NonGenericWorkout} options={{ headerShown: false }}/>
+
   </HomeStack.Navigator>
 );
 

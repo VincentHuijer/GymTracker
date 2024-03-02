@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { BalanceScaleIcon, CopyIcon, DietGraneIcon, HistoryRepeatIcon, PlusIcon, WorkoutsTabIconDumbell } from '../assets/SvgIcons';
 import dumbellIcon from '../assets/dumbbellIcon.png';
 import { useNavigation } from '@react-navigation/native';
+import ExerciseComponent from '../components/ExerciseComponent';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -106,6 +107,8 @@ const HomeScreen = () => {
             <Text style={{ color: 'black', textAlign: 'center' }}>Workout history</Text>
           </View>
         </View>
+
+          <ExerciseComponent/>
       </View>
 
 
