@@ -46,7 +46,7 @@ export const Avatar = styled.Image`
   border-width: 2px;
   border-color: ${secondary};
   margin-bottom: 10px;
-  amrgin-top: 10px;
+  margin-top: 10px;
 `;
 
 export const WelcomeImage = styled.Image`
@@ -55,7 +55,7 @@ export const WelcomeImage = styled.Image`
 `;
 
 export const PageLogo = styled.Image`
-  width: 250px;
+  width: 200px;
   height: 200px;
 `;
 

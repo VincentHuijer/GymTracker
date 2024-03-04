@@ -17,7 +17,8 @@ import {
   ExtraView,
   ExtraText,
   TextLinkContent,
-  TextLink
+  TextLink,
+  PageLogoBorder
 } from './../components/styles';
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
@@ -38,7 +39,7 @@ const Login = ({ setUserAuthenticated }) => {
   <StyledContainer>
     <StatusBar style="dark"/>
       <InnerContainer>
-        <PageLogo resizeMode="cover" source={require('./../assets/flexer.png')} style={{marginTop: 50}} />
+        <PageLogo resizeMode="cover" source={require('./../assets/flexer.png')} style={{marginTop: 50, borderRadius: 200, borderWidth: 5, borderColor: 'white',}} />
         <PageTitle> Vincent Gym </PageTitle>
         <SubTitle> Account Login </SubTitle>
         <Formik
