@@ -5,7 +5,7 @@ import PlusButton from './PlusButton';
 import ItemBox from './ItemBox';
 
 
-const ExerciseComponent = () => {
+const AddExerciseComponent = () => {
   return (
   <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#1C1C1E', paddingTop: 20}}>
     <TouchableOpacity style={{backgroundColor: '#252429', paddingVertical: 15,margin: 20,borderRadius: 10,width: '80%',alignItems: 'center', /*horizontally*/}} onPress={() => navigation.navigate('NonGenericWorkout')}>
@@ -21,4 +21,4 @@ const ExerciseComponent = () => {
   )
 }
 
-export default ExerciseComponent;
+export default AddExerciseComponent;
