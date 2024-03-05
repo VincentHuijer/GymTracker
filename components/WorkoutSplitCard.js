@@ -13,12 +13,15 @@ const WorkoutSplitCard = ({workoutName = 'WorkoutName', day = 1, split = 'push',
             {workoutName}, {day}, {split}
           </Text>
         </View>
-        <View style={{ alignItems: 'center'}}>
-          <EditExerciseComponent icon={<PullIcon/>} exerciseName={'dumbell press'}/>
+        <View style={{ alignItems: 'center', marginBottom: 10 }}>
+          {workouts.map((workouts, index) => (
+            <EditExerciseComponent key={index} icon={workouts.icon} workoutsName={workouts.name} />
+          ))}
+          {/* <EditExerciseComponent icon={<PullIcon/>} exerciseName={'dumbell press'}/>
           <EditExerciseComponent icon={<PushIcon/>}/>
           <EditExerciseComponent icon={<MuscleIcon/>}/>
           <EditExerciseComponent icon={<WorkoutsTabIconDumbell/>}/>
-          <EditExerciseComponent icon={<DietGraneIcon/>}/>
+          <EditExerciseComponent icon={<DietGraneIcon/>}/> */}
           <WhiteTextButton text={'+ add exercise'}/>
 
         </View>
