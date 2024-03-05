@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { BalanceScaleIcon, CopyIcon, DietGraneIcon, HistoryRepeatIcon, PlusIcon, WorkoutsTabIconDumbell } from '../assets/SvgIcons';
+import { BalanceScaleIcon, CopyIcon, DietGraneIcon, HistoryRepeatIcon, PlusIcon, PullIcon, PushIcon, WorkoutsTabIconDumbell } from '../assets/SvgIcons';
 import dumbellIcon from '../assets/dumbbellIcon.png';
 import { useNavigation } from '@react-navigation/native';
 import AddExerciseComponent from '../components/AddExerciseComponent';
@@ -14,25 +14,8 @@ const HomeScreen = () => {
   const currentDayIndex = getAdjustedDayIndex(new Date().getUTCDay());
 
 
-  const InnerShadowBox = ({ children }) => {
-    return (
-      <View style={{
-        backgroundColor: 'white',
-        paddingVertical: 30,
-        paddingHorizontal: 60,
-        borderRadius: 20,
-        shadowColor: 'black',
-        shadowOpacity: 0.2,
-        shadowOffset: { width: 0, height: 0 },
-        shadowRadius: 10,
-      }}>
-        {children}
-      </View>
-    );
-  };
-
   return (
-    <View style={{ flex: 1, backgroundColor: '#1C1C1E' }}>{/* In React Native, the flex property is used to define how a component should grow in relation to its siblings within a flex container. Setting flex: 1 on a component makes it take up all the available space along the main axis of its container. */}
+    <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>{/* In React Native, the flex property is used to define how a component should grow in relation to its siblings within a flex container. Setting flex: 1 on a component makes it take up all the available space along the main axis of its container. */}
       <View style={{ backgroundColor: '#343438', padding: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 15}}>
       <Text style={{ color: 'white', fontSize: 'large', fontWeight: '400'}}> Workouts </Text>
         <View style={{ flex: 1,  padding: 20 }}>
@@ -110,7 +93,8 @@ const HomeScreen = () => {
         </View>
 
           {/* <AddExerciseComponent/> */}
-          <EditExerciseComponent/>
+          <EditExerciseComponent icon={<PullIcon/>}/>
+          
       </View>
 
 

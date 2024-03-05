@@ -38,6 +38,7 @@ const WorkoutsNavigator = () => (
     <WorkoutsStack.Screen name="CreateWorkouts" component={CreateWorkoutsScreen} options={{ headerShown: false }} />
     <WorkoutsStack.Screen name="CreateSplits" component={CreateSplitsScreen} options={{ headerShown: false }} />
     <WorkoutsStack.Screen name="MyWorkouts" component={MyWorkoutsScreen} options={{ headerShown: false }} />
+    <WorkoutsStack.Screen name="NonGenericWorkout" component={NonGenericWorkout} options={{ headerShown: false }} />
   </WorkoutsStack.Navigator>
 );
 
