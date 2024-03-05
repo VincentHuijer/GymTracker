@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const WhiteTextButton = ({text, style}) => {
+const ThinLine = ({text, style}) => {
   return (
     <View
       style={{
         backgroundColor: 'white',
         borderRadius: 6,
         width: '100%',
-        height: 40,
+        height: 1,
         justifyContent: 'center',
         ...style
       }}
@@ -26,4 +26,4 @@ const WhiteTextButton = ({text, style}) => {
   );
 };
 
-export default WhiteTextButton;
+export default ThinLine;
