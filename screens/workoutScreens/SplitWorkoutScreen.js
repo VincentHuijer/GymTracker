@@ -26,7 +26,7 @@ const SplitWorkoutScreen = () => {
   ];
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#1C1C1E' }}>{/* In React Native, the flex property is used to define how a component should grow in relation to its siblings within a flex container. Setting flex: 1 on a component makes it take up all the available space along the main axis of its container. */}
+    <View style={{ flex: 1, backgroundColor: '#1C1C1E' }}>
       <ScrollView>
         <WorkoutSplitCard workoutName="Workout A" day={1} split="push" workouts={workout1Seeder} />
         <WorkoutSplitCard workoutName="Workout B" day={4} split="push" workouts={workout2Seeder} />
@@ -34,8 +34,7 @@ const SplitWorkoutScreen = () => {
         <ThinLine style={{alignSelf: 'center', width: '95%', marginVertical: 10}}/>
         <WhiteTextButton text={'+ add day'} style={{alignSelf: 'center', width: '95%', marginBottom: 10}}/>
       </ScrollView>
-  </View>
-
+    </View>
   )
 }
 
