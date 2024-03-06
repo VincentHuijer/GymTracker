@@ -1,8 +1,13 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-web';
+import { useNavigation } from '@react-navigation/native';
 
-const WhiteTextButton = ({text, style}) => {
+const WhiteTextButton = ({text, style, refLink = 'homeScreen'}) => {
+  const navigation = useNavigation();
+
   return (
+    
     <View
       style={{
         backgroundColor: 'white',
@@ -13,6 +18,8 @@ const WhiteTextButton = ({text, style}) => {
         ...style
       }}
     >
+    <TouchableOpacity onPress={() => navigation.navigate(refLink)}>
+
       <Text
         style={{
           fontSize: 20,
@@ -22,6 +29,7 @@ const WhiteTextButton = ({text, style}) => {
       >
         {text}
       </Text>
+      </TouchableOpacity>
     </View>
   );
 };

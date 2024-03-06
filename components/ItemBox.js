@@ -1,6 +1,6 @@
 import { View } from "react-native-web";
 
-const ItemBox = ({ children, width = 50, height = 50 }) => {
+const ItemBox = ({ children = '🤯', width = 50, height = 50 }) => {
   return(
     <View
       style={{

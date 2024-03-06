@@ -16,7 +16,7 @@ const WorkoutsScreen = () => {
         <Text style={styles.text}>Create Split</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('SplitWorkoutScreen')}>
+      <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('MySplits')}>
         <Text style={styles.text}>View my splits</Text>
       </TouchableOpacity>
 

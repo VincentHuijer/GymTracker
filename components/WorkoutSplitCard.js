@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text } from "react-native-web";
-import { DietGraneIcon, MuscleIcon, PullIcon, PushIcon, SixDotsBrailleIcon, WorkoutsTabIconDumbell } from "../assets/SvgIcons.js";
+import { View, Text, TouchableWithoutFeedback, TouchableHighlight } from "react-native-web";
 import EditExerciseComponent from "./EditExerciseComponent.js";
 import WhiteTextButton from './WhiteTextButton.js';
 
 const WorkoutSplitCard = ({workoutName = 'WorkoutName', day = 1, split = 'push', workouts = []}) => {
+
   return (
     <View style={{  backgroundColor: '#1C1C1E', alignItems: 'center', marginTop: 5 }}>
       <View style={{  backgroundColor: '#4F4F4F', width: '95%', alignItems: 'center', paddingBottom: 10}}>
@@ -17,9 +17,10 @@ const WorkoutSplitCard = ({workoutName = 'WorkoutName', day = 1, split = 'push',
           {workouts.map((workouts, index) => (
             <EditExerciseComponent key={index} icon={workouts.icon} workoutsName={workouts.name} />
           ))}
-          
 
-        <WhiteTextButton text={'+ add exercise'}/>
+
+            <WhiteTextButton text={'+ add exercise'} refLink='AddExerciseListScreen'/>
+        
         </View>
       </View>
     </View>

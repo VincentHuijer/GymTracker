@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { PushIcon, PullIcon, MuscleIcon, LegPressIcon, PlusIcon } from '../../assets/SvgIcons';
+import WorkoutComponent from '../../components/WorkoutComponent';
+import PlusButton from '../../components/PlusButton';
 
 const MyWorkoutsScreen = () => {
   const navigation = useNavigation();
@@ -9,7 +11,16 @@ const MyWorkoutsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('NonGenericWorkout')}>
+
+      
+      <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<PushIcon/>}/>
+      <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<PushIcon/>}/>
+      <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<MuscleIcon/>}/>
+      <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<LegPressIcon/>}/>
+      <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<MuscleIcon/>}/>
+      <WorkoutComponent workoutName='Add New Workout' workoutLink='NonGenericWorkout' workoutIcon={<PlusIcon/>}/>
+
+      {/* <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('NonGenericWorkout')}>
         <View style={{ flexDirection: 'row', marginLeft: 20,}}>
           <LegPressIcon style={{ width: 40, height: 40, marginBottom: 2}} />
           <Text style={[styles.text, {alignSelf: 'center', marginLeft: 10}]}>MyLegWorkout#1</Text>
@@ -38,7 +49,7 @@ const MyWorkoutsScreen = () => {
           <PlusIcon style={{ width: 40, height: 40, marginBottom: 2}} />
           <Text style={[styles.text, {alignSelf: 'center', marginLeft: 10}]}>Add new workout </Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -50,14 +61,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#1C1C1E',
-    paddingTop: 20// only great until custom splits get added
+    paddingTop: 20
   },
   box: {
     flexDirection: 'row',
     backgroundColor: 'white',
     paddingVertical: 15,
     margin: 20,
-    borderRadius: 10, //edges on borders
+    borderRadius: 10, 
     width: '80%',
     alignItems: 'center', 
   },
