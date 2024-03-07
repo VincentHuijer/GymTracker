@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 const ProgressScreen = () => {
   return (
     <View>
-      <Text>Progress</Text>
+      <Text>Welcome to my fitness app</Text>
     </View>
   );
 };
