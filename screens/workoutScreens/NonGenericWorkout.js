@@ -5,16 +5,16 @@ import WhiteTextButton from "../../components/WhiteTextButton";
 
 const NonGenericWorkout = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: '#343438', alignItems: 'center'}}>
-      <EditExerciseComponent icon={<PullIcon/>}/>
-      <EditExerciseComponent icon={<PushIcon/>}/>
-      <EditExerciseComponent icon={<MuscleIcon/>}/>
-      <EditExerciseComponent icon={<WorkoutsTabIconDumbell/>}/>
-      <EditExerciseComponent icon={<DietGraneIcon/>}/>
-
-      <View style={{width: '87%'}}>
-
-      <WhiteTextButton text={'+ add exercise'} refLink='AddExerciseListScreen'/>
+    <View style={{ flex: 1, backgroundColor: '#1C1C1E', alignItems: 'center'}}>
+      <View style={{ flex: 1, backgroundColor: '#46454C', width: '95%', alignItems: 'center'}}>
+        <EditExerciseComponent icon={<PullIcon/>}/>
+        <EditExerciseComponent icon={<PushIcon/>}/>
+        <EditExerciseComponent icon={<MuscleIcon/>}/>
+        <EditExerciseComponent icon={<WorkoutsTabIconDumbell/>}/>
+        <EditExerciseComponent icon={<DietGraneIcon/>}/>
+        <View style={{width: '91%'}}>
+          <WhiteTextButton text={'+ add exercise'} refLink='AddExerciseListScreen'/>
+        </View>
       </View>
     </View>
   );

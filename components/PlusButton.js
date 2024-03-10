@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const PlusButton = () => {
+const PlusButton = ({width = 40, height = 40}) => {
   return (
     <View
       style={{
-        width: 40,
-        height: 40,
+        width: width,
+        height: height,
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
@@ -18,6 +18,8 @@ const PlusButton = () => {
           flex: 1,
           fontSize: 24,
           color: 'black',
+          textAlign: 'center',
+          marginTop: 7
         }}
       >
         +

@@ -1,10 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const CreateSplitsScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('PPLSplit')}>
+      <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('SplitWorkoutScreen')}>
         <Text style={styles.text}>Push Pull Legs Split</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('TotalBodySplit')}>

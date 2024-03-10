@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { PushIcon, SixDotsBrailleIcon } from '../assets/SvgIcons';
+import { MuscleIcon, PushIcon, SixDotsBrailleIcon } from '../assets/SvgIcons';
 import ItemBox from './ItemBox';
 
 
-const EditExerciseComponent = ({icon, exerciseName = 'Exercise'}) => {
+const EditExerciseComponent = ({icon = <MuscleIcon/>, exerciseName = 'Exercise'}) => {
   return (
   <View style={{ backgroundColor: '#252429', borderRadius: 8, alignSelf:'center', marginVertical: 8}}>
     <TouchableOpacity

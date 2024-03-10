@@ -1,21 +1,38 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { MuscleIcon } from '../assets/SvgIcons';
-import PlusButton from './PlusButton';
+import { MuscleIcon, PushIcon, SixDotsBrailleIcon } from '../assets/SvgIcons';
 import ItemBox from './ItemBox';
+import PlusButton from './PlusButton';
 
 
-const AddExerciseComponent = ({icon = <MuscleIcon/>, exerciseName = 'Exercise'}) => {
+const AddExerciseComponent = ({icon = <MuscleIcon/>, exerciseName = 'Dumbell Chest Press'}) => {
   return (
-  <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#1C1C1E'}}>
-    <TouchableOpacity style={{flexDirection: 'row', backgroundColor: '#252429', paddingVertical: 8, paddingHorizontal: 60, marginVertical: 8, marginHorizontal: 20,borderRadius: 10, alignItems: 'center', }} onPress={() => navigation.navigate('NonGenericWorkout')}>
+  <View style={{ backgroundColor: '#252429', borderRadius: 8, marginVertical: 8}}>
+    <TouchableOpacity
+      style={{
+        paddingVertical: 5,
+        marginLeft: 5,
+        marginRight: 10,
+        borderRadius: 8,
+        flexDirection: 'row', 
+        alignItems: 'center'
+      }}
+      onPress={() => navigation.navigate('NonGenericWorkout')}
+    >
+
+    <View style={{marginRight: 50, marginLeft: 10}}>
+
         <ItemBox>
           {icon}
         </ItemBox>
-        <Text style={[{alignSelf: 'center', marginHorizontal: 40, fontSize: 18, color: 'white', fontWeight:'bold'}]}>{exerciseName}</Text>
-        <PlusButton/>
+    </View>
+      <View>
+        <Text style={{ fontSize: 18, color: 'white', fontWeight: 'bold',  marginRight: 50 }}>{exerciseName}</Text>
+      </View>
+      <PlusButton width={50} height={50}/>
     </TouchableOpacity>
   </View>
+  
   )
 }
 

@@ -26,6 +26,7 @@ import NonGenericWorkout from './screens/workoutScreens/NonGenericWorkout';
 import SplitWorkoutScreen from './screens/workoutScreens/SplitWorkoutScreen';
 import MySplits from './screens/MySplits';
 import AddExerciseListScreen from './screens/workoutScreens/AddExerciseListScreen';
+import AddChestExerciseWorkoutScreen from './screens/workoutScreens/AddChestExerciseWorkoutScreen';
 
 //scripts
 
@@ -45,6 +46,7 @@ const WorkoutsNavigator = () => (
     <WorkoutsStack.Screen name="MySplits" component={MySplits} options={{ headerShown: false }} />
     <WorkoutsStack.Screen name="SplitWorkoutScreen" component={SplitWorkoutScreen} options={{ headerShown: false }} />
     <WorkoutsStack.Screen name="AddExerciseListScreen" component={AddExerciseListScreen} options={{ headerShown: false }} />
+    <WorkoutsStack.Screen name="AddChestExerciseWorkoutScreen" component={AddChestExerciseWorkoutScreen} options={{ headerShown: false }} />
   </WorkoutsStack.Navigator>
 );
 
