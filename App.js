@@ -73,6 +73,7 @@ const HomeNavigator = () => (
     <HomeStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
     <HomeStack.Screen name="MyWorkouts" component={MyWorkoutsScreen} options={{ headerShown: false }}/>
     <HomeStack.Screen name="NonGenericWorkout" component={NonGenericWorkout} options={{ headerShown: false }}/>
+    <HomeStack.Screen name="AddExerciseListScreen" component={AddExerciseListScreen} options={{ headerShown: false }}/>
   </HomeStack.Navigator>
 );
 

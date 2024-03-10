@@ -5,6 +5,8 @@ import ItemBox from './ItemBox';
 import PlusButton from './PlusButton';
 
 
+//FYI there exists 'AddExerciseComponent' which seems to do the job better.
+
 const ListExerciseComponent = ({icon = <MuscleIcon/>, exerciseName = 'Exercise'}) => {
   return (
   <View style={{ backgroundColor: '#252429', borderRadius: 8, alignSelf:'center', marginBottom: 15}}>

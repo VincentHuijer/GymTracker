@@ -1,21 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { PushIcon } from '../assets/SvgIcons';
+import { MuscleIcon } from '../assets/SvgIcons';
 import PlusButton from './PlusButton';
 import ItemBox from './ItemBox';
 
 
-const AddExerciseComponent = () => {
+const AddExerciseComponent = ({icon = <MuscleIcon/>, exerciseName = 'Exercise'}) => {
   return (
-  <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#1C1C1E', paddingTop: 20}}>
-    <TouchableOpacity style={{backgroundColor: '#252429', paddingVertical: 15,margin: 20,borderRadius: 10,width: '80%',alignItems: 'center', /*horizontally*/}} onPress={() => navigation.navigate('NonGenericWorkout')}>
-      <View style={{ flexDirection: 'row', marginLeft: 20,}}>
-      <ItemBox>
-      <PushIcon color='white'/>
-      </ItemBox>
-        <Text style={[{alignSelf: 'center', marginHorizontal: 40, fontSize: 18, color: 'white', fontWeight:'bold'}]}>GenericExercise</Text>
+  <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#1C1C1E'}}>
+    <TouchableOpacity style={{flexDirection: 'row', backgroundColor: '#252429', paddingVertical: 8, paddingHorizontal: 60, marginVertical: 8, marginHorizontal: 20,borderRadius: 10, alignItems: 'center', }} onPress={() => navigation.navigate('NonGenericWorkout')}>
+        <ItemBox>
+          {icon}
+        </ItemBox>
+        <Text style={[{alignSelf: 'center', marginHorizontal: 40, fontSize: 18, color: 'white', fontWeight:'bold'}]}>{exerciseName}</Text>
         <PlusButton/>
-      </View>
     </TouchableOpacity>
   </View>
   )

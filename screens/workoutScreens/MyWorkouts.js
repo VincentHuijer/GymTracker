@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { PushIcon, PullIcon, MuscleIcon, LegPressIcon, PlusIcon } from '../../assets/SvgIcons';
 import WorkoutComponent from '../../components/WorkoutComponent';
 import PlusButton from '../../components/PlusButton';
+import WhiteTextButton from '../../components/WhiteTextButton';
 
 const MyWorkoutsScreen = () => {
   const navigation = useNavigation();
@@ -20,6 +21,7 @@ const MyWorkoutsScreen = () => {
       <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<MuscleIcon/>}/>
       <WorkoutComponent workoutName='Add New Workout' workoutLink='NonGenericWorkout' workoutIcon={<PlusIcon/>}/>
 
+      
       {/* <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('NonGenericWorkout')}>
         <View style={{ flexDirection: 'row', marginLeft: 20,}}>
           <LegPressIcon style={{ width: 40, height: 40, marginBottom: 2}} />

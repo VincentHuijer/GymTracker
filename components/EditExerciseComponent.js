@@ -6,7 +6,7 @@ import ItemBox from './ItemBox';
 
 const EditExerciseComponent = ({icon, exerciseName = 'Exercise'}) => {
   return (
-  <View style={{ backgroundColor: '#252429', borderRadius: 8, alignSelf:'center', marginBottom: 15}}>
+  <View style={{ backgroundColor: '#252429', borderRadius: 8, alignSelf:'center', marginVertical: 8}}>
     <TouchableOpacity
       style={{
         paddingVertical: 5,
