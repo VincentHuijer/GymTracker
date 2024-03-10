@@ -12,8 +12,6 @@ const MyWorkoutsScreen = () => {
 
   return (
     <View style={styles.container}>
-
-      
       <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<PushIcon/>}/>
       <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<PushIcon/>}/>
       <WorkoutComponent workoutName='MySpicyWorkout' workoutLink='NonGenericWorkout' workoutIcon={<MuscleIcon/>}/>
