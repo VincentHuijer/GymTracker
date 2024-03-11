@@ -17,30 +17,30 @@ const HomeScreen = () => {
   return (
     <View style={{ flex: 1, backgroundColor: '#1C1C1E' }}>{/* In React Native, the flex property is used to define how a component should grow in relation to its siblings within a flex container. Setting flex: 1 on a component makes it take up all the available space along the main axis of its container. */}
       <View style={{ backgroundColor: '#343438', padding: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 15}}>
-      <Text style={{ color: 'white', fontSize: 'large', fontWeight: '400'}}> Workouts </Text>
-        <View style={{ flex: 1,  padding: 20 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            {daysOfWeek.map((day, index) => (
-              <View
-                key={index}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  backgroundColor: index === currentDayIndex ? '#3E1FFD' : '#51566A',
-                  alignItems: 'center',
-                  marginHorizontal: 10,
-                  justifyContent: 'center',
-                  
+        <Text style={{ color: 'white', fontSize: 'large', fontWeight: '400'}}> Workouts </Text>
+          <View style={{ flex: 1,  padding: 20 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              {daysOfWeek.map((day, index) => (
+                <View
+                  key={index}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 20,
+                    backgroundColor: index === currentDayIndex ? '#3E1FFD' : '#51566A',
+                    alignItems: 'center',
+                    marginHorizontal: 10,
+                    justifyContent: 'center',
+                    
 
-                }}
-              >
-                <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{day}</Text>
-              </View>
-            ))}
+                  }}
+                >
+                  <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{day}</Text>
+                </View>
+              ))}
+            </View>
+
           </View>
-
-        </View>
       </View>
 
       <View>
@@ -93,7 +93,7 @@ const HomeScreen = () => {
         </View>
 
           
-      </View>
+    </View>
 
 
       

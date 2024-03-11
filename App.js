@@ -81,7 +81,7 @@ const HomeNavigator = () => (
 
 
 const MainNavigator = () => {
-  const [userAuthenticated, setUserAuthenticated] = useState(true); /* should be false but i dont wanna log in each time*/
+  const [userAuthenticated, setUserAuthenticated] = useState(false); /* should be false but i dont wanna log in each time*/
 
   return (
     <NavigationContainer>
