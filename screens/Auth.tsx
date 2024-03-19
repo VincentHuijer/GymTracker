@@ -1,7 +1,34 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View, AppState } from 'react-native'
+import { Alert, StyleSheet, View, AppState, TouchableOpacity} from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input } from 'react-native-elements'
+import { 
+  StyledContainer, 
+  InnerContainer, 
+  PageLogo, 
+  PageTitle,
+  SubTitle,
+  StyledFormArea,
+  LeftIcon,
+  StyledInputLabel,
+  StyledTextInput,
+  RightIcon,
+  StyledButton,
+  ButtonText,
+  Colors,
+  MsgBox,
+  Line,
+  ExtraView,
+  ExtraText,
+  TextLinkContent,
+  TextLink
+} from './../components/styles';
+import { StatusBar } from "expo-status-bar";
+import { Formik } from 'formik';
+import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -14,6 +41,8 @@ AppState.addEventListener('change', (state) => {
     supabase.auth.stopAutoRefresh()
   }
 })
+
+const {brand, darkLight, primary, white} = Colors;
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -47,49 +76,49 @@ export default function Auth() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input
-          label="Email"
-          leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="email@address.com"
-          autoCapitalize={'none'}
-        />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Input
-          label="Password"
-          leftIcon={{ type: 'font-awesome', name: 'lock' }}
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-          placeholder="Password"
-          autoCapitalize={'none'}
-        />
-      </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
-      </View>
-    </View>
+    <StyledContainer>
+      <StatusBar style="dark"/>
+      <InnerContainer>
+        <PageLogo resizeMode="cover" source={require('./../assets/FitnessLogo.png')} style={{marginTop: 50, borderRadius: 200, borderWidth: 5, borderColor: 'white',}} />
+        <PageTitle> Vincent Gym </PageTitle>
+        <SubTitle> Account Login </SubTitle>
+        <View style={{marginTop: 40, padding: 12}}>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              label="Email"
+              leftIcon = {
+                  <Octicons name='mail' color={brand} size={25}/>
+              }
+              inputStyle={{ color: 'white' }} // Setting text color to white
+              onChangeText={(text) => setEmail(text)}
+              value={email}
+              placeholder="email@address.com"
+              placeholderTextColor={darkLight}
+              autoCapitalize={'none'}
+            />
+          </View>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch' }}>
+            <Input
+              label="Password"
+              leftIcon = { <Octicons name='lock' color={brand} size={25}/> }
+              inputStyle={{ color: 'white' }} // Setting text color to white
+              onChangeText={(text) => setPassword(text)}
+              value={password}
+              secureTextEntry={true}
+              placeholder="Password"
+              placeholderTextColor={darkLight}
+              autoCapitalize={'none'}
+            />
+          </View>
+          <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
+            <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+          </View>
+          <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
+            <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+          </View>
+        </View>
+      </InnerContainer>
+    </StyledContainer>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
-})
