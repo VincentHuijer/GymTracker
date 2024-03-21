@@ -89,7 +89,7 @@ export default function Auth() {
               leftIcon = {
                   <Octicons name='mail' color={brand} size={25}/>
               }
-              inputStyle={{ color: 'white' }} // Setting text color to white
+              inputStyle={{ color: 'white' }}
               onChangeText={(text) => setEmail(text)}
               value={email}
               placeholder="email@address.com"
@@ -101,7 +101,7 @@ export default function Auth() {
             <Input
               label="Password"
               leftIcon = { <Octicons name='lock' color={brand} size={25}/> }
-              inputStyle={{ color: 'white' }} // Setting text color to white
+              inputStyle={{ color: 'white' }}
               onChangeText={(text) => setPassword(text)}
               value={password}
               secureTextEntry={true}

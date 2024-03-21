@@ -18,6 +18,9 @@ const ProfileScreen = () => {
       <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Welcome')}>
         <Text style={styles.text}>Welcome</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Account')}>
+        <Text style={styles.text}>Account</Text>
+      </TouchableOpacity>
     </View>
   );
 };

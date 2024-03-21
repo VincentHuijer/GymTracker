@@ -78,6 +78,8 @@ const ProfileNavigator = () => (
     <ProfileStack.Screen name="Login" component={Login} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+    <ProfileStack.Screen name="Account"  component={Account} options={{ headerShown: false }} />
+    
   </ProfileStack.Navigator>
 );
 
@@ -102,12 +104,12 @@ const HomeNavigator = () => (
 );
 
 
-const MainNavigator = () => {
-  const [userAuthenticated, setUserAuthenticated] = useState(false); /* should be false but i dont wanna log in each time*/
+const MainNavigator = ({ session }: { session: Session }) => {
+ // const [userAuthenticated, setUserAuthenticated] = useState(false); /* should be false but i dont wanna log in each time*/
 
   return (
     <NavigationContainer>
-      {userAuthenticated ? (
+    
       <Tab.Navigator >
         <Tab.Screen
           name="Home"
@@ -154,17 +156,14 @@ const MainNavigator = () => {
             ),
           }}
         />
-      </Tab.Navigator>) : (
-
-        <AuthNavigator setUserAuthenticated={setUserAuthenticated} />
-      )}
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
 
   return (
     <>
-      {session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
+      {session && session.user ? <MainNavigator key={session.user.id} session={session} /> : <Auth />}
     </>
   )
 }
