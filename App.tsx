@@ -72,14 +72,17 @@ const WorkoutsNavigator = () => (
   </WorkoutsStack.Navigator>
 );
 
-const ProfileNavigator = () => (
+interface ProfileNavigatorProps {
+  session: Session;
+}
+
+const ProfileNavigator: React.FC<ProfileNavigatorProps> = ({ session }) => (
   <ProfileStack.Navigator screenOptions={{}}>
     <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
     <ProfileStack.Screen name="Login" component={Login} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
-    <ProfileStack.Screen name="Account"  component={Account} options={{ headerShown: false }} />
-    
+    <ProfileStack.Screen name="Account"  component={() => <Account session={session} />} options={{ headerShown: false }} />
   </ProfileStack.Navigator>
 );
 
@@ -105,7 +108,6 @@ const HomeNavigator = () => (
 
 
 const MainNavigator = ({ session }: { session: Session }) => {
- // const [userAuthenticated, setUserAuthenticated] = useState(false); /* should be false but i dont wanna log in each time*/
 
   return (
     <NavigationContainer>
@@ -149,7 +151,7 @@ const MainNavigator = ({ session }: { session: Session }) => {
         />
         <Tab.Screen
           name="Profile"
-          component={ProfileNavigator}
+          component={() => <ProfileNavigator session={session} />}
           options={{
             tabBarIcon: ({ color, size }) => (
               <ProfileTabIcon color={color} size={size} />
