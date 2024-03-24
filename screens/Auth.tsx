@@ -116,11 +116,9 @@ export default function Auth() {
           <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
             <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
           </View>
-          <TouchableOpacity>
-            <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
-              <Button title="Sign up" disabled={loading} onPress={() => navigation.navigate('AuthRegistration')}/> {/*Works despite being red. Idk why it does the funny */}
-            </View>
-          </TouchableOpacity>
+          <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
+            <Button title="Sign up" disabled={loading} onPress={() => navigation.navigate('AuthRegistration')}/> {/*Works despite being red. Idk why it does the funny */}
+          </View>
         </View>
       </InnerContainer>
     </StyledContainer>
