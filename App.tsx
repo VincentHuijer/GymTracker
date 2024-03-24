@@ -37,6 +37,8 @@ import Auth from './screens/Auth'
 import Account from './screens/Account'
 import { Session } from '@supabase/supabase-js'
 import { View } from 'react-native'
+import { ThemeContext } from 'styled-components/native';
+import AuthRegistration from './screens/AuthRegistration';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -82,20 +84,11 @@ const ProfileNavigator: React.FC<ProfileNavigatorProps> = ({ session }) => (
     <ProfileStack.Screen name="Login" component={Login} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+    {/* <ProfileStack.Screen name="Account" component={Account} options={{ headerShown: false }} /> */}
     <ProfileStack.Screen name="Account"  component={() => <Account session={session} />} options={{ headerShown: false }} />
   </ProfileStack.Navigator>
 );
 
-const AuthNavigator = ({setUserAuthenticated}) => (
-  <AuthStack.Navigator screenOptions={{ }}>
-    <ProfileStack.Screen name="Login">
-      {(props) => <Login {...props} setUserAuthenticated={setUserAuthenticated} />}
-    </ProfileStack.Screen>
-    <ProfileStack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
-    <ProfileStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
-    <ProfileStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
-  </AuthStack.Navigator>
-);
 
 const HomeNavigator = () => (
   <HomeStack.Navigator screenOptions={{}}>
@@ -107,11 +100,21 @@ const HomeNavigator = () => (
 );
 
 
+const AuthNavigator = () => (
+  <AuthStack.Navigator screenOptions={{}}>
+    <AuthStack.Screen name="Auth" component={Auth} options={{ headerShown: false }}/>
+    <AuthStack.Screen name="AuthRegistration" component={AuthRegistration} options={{ headerShown: false }}/>
+  </AuthStack.Navigator>
+);
+
+
+
+
 const MainNavigator = ({ session }: { session: Session }) => {
 
   return (
+  <ThemeContext.Provider value={session}>
     <NavigationContainer>
-    
       <Tab.Navigator >
         <Tab.Screen
           name="Home"
@@ -160,12 +163,30 @@ const MainNavigator = ({ session }: { session: Session }) => {
         />
       </Tab.Navigator>
     </NavigationContainer>
+  </ThemeContext.Provider>
   );
 };
 
+const AuthMainNavigator = () => {
+  return (
+    <NavigationContainer>
+      <AuthStack.Navigator>
+        <AuthStack.Screen
+          name="SomeScreen"
+          component={AuthNavigator}
+          options={{ headerShown: false }}
+        />
+        {/* Add more screens as needed */}
+      </AuthStack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+
+
   return (
     <>
-      {session && session.user ? <MainNavigator key={session.user.id} session={session} /> : <Auth />}
+      {session && session.user ? <MainNavigator key={session.user.id} session={session} /> : <AuthMainNavigator />}
     </>
   )
 }

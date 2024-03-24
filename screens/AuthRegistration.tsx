@@ -27,9 +27,9 @@ import { StatusBar } from "expo-status-bar";
 import { Formik } from 'formik';
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
-import AuthRegistration from './AuthRegistration';
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -45,10 +45,10 @@ AppState.addEventListener('change', (state) => {
 
 const {brand, darkLight, primary, white} = Colors;
 
-export default function Auth() {
-  const navigation = useNavigation();
-
+export default function AuthRegistration() {
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState(moment().format('DD/MM/YYYY'));
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -78,14 +78,30 @@ export default function Auth() {
     setLoading(false)
   }
 
+  
+
   return (
     <StyledContainer>
       <StatusBar style="dark"/>
       <InnerContainer>
         <PageLogo resizeMode="cover" source={require('./../assets/FitnessLogo.png')} style={{marginTop: 50, borderRadius: 200, borderWidth: 5, borderColor: 'white',}} />
-        <PageTitle> Vincent Gym </PageTitle>
-        <SubTitle> Account Login </SubTitle>
+        <PageTitle> MoggingFitness </PageTitle>
+        <SubTitle> Account Signup </SubTitle>
         <View style={{marginTop: 40, padding: 12}}>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              label="username"
+              leftIcon = {
+                  <Octicons name='person' color={brand} size={25}/>
+              }
+              inputStyle={{ color: 'white' }}
+              onChangeText={(text) => setUsername(text)}
+              value={email}
+              placeholder="email@address.com"
+              placeholderTextColor={darkLight}
+              autoCapitalize={'none'}
+            />
+          </View>
           <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
             <Input
               label="Email"
@@ -96,6 +112,20 @@ export default function Auth() {
               onChangeText={(text) => setEmail(text)}
               value={email}
               placeholder="email@address.com"
+              placeholderTextColor={darkLight}
+              autoCapitalize={'none'}
+            />
+          </View>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              label="Date Of Birth"
+              leftIcon = {
+                  <Octicons name='calendar' color={brand} size={25}/>
+              }
+              inputStyle={{ color: 'white' }}
+              onChangeText={(text) => setDateOfBirth(text)}
+              value={email}
+              placeholder="1/1/2024"
               placeholderTextColor={darkLight}
               autoCapitalize={'none'}
             />
@@ -116,11 +146,9 @@ export default function Auth() {
           <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
             <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
           </View>
-          <TouchableOpacity>
-            <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
-              <Button title="Sign up" disabled={loading} onPress={() => navigation.navigate('AuthRegistration')}/> {/*Works despite being red. Idk why it does the funny */}
-            </View>
-          </TouchableOpacity>
+          <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
+            <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+          </View>
         </View>
       </InnerContainer>
     </StyledContainer>
