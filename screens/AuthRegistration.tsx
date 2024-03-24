@@ -51,6 +51,7 @@ export default function AuthRegistration() {
   const [dateOfBirth, setDateOfBirth] = useState(moment().format('DD/MM/YYYY'));
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const navigation = useNavigation();
 
   async function signInWithEmail() {
     setLoading(true)
@@ -71,14 +72,18 @@ export default function AuthRegistration() {
     } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        data: {
+          username: username,
+          date_of_birth: dateOfBirth
+        }
+      }
     })
 
     if (error) Alert.alert(error.message)
     if (!session) Alert.alert('Please check your inbox for email verification!')
     setLoading(false)
   }
-
-  
 
   return (
     <StyledContainer>
@@ -87,7 +92,7 @@ export default function AuthRegistration() {
         <PageLogo resizeMode="cover" source={require('./../assets/FitnessLogo.png')} style={{marginTop: 50, borderRadius: 200, borderWidth: 5, borderColor: 'white',}} />
         <PageTitle> MoggingFitness </PageTitle>
         <SubTitle> Account Signup </SubTitle>
-        <View style={{marginTop: 40, padding: 12}}>
+        <View>
           <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
             <Input
               label="username"
@@ -96,8 +101,8 @@ export default function AuthRegistration() {
               }
               inputStyle={{ color: 'white' }}
               onChangeText={(text) => setUsername(text)}
-              value={email}
-              placeholder="email@address.com"
+              value={username}
+              placeholder="username"
               placeholderTextColor={darkLight}
               autoCapitalize={'none'}
             />
@@ -124,7 +129,7 @@ export default function AuthRegistration() {
               }
               inputStyle={{ color: 'white' }}
               onChangeText={(text) => setDateOfBirth(text)}
-              value={email}
+              value={dateOfBirth}
               placeholder="1/1/2024"
               placeholderTextColor={darkLight}
               autoCapitalize={'none'}
@@ -144,10 +149,10 @@ export default function AuthRegistration() {
             />
           </View>
           <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
-            <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+            <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
           </View>
           <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
-            <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+          <Button title="Return to login" disabled={loading} onPress={() => navigation.navigate('Auth')}/> {/*Works despite being red. Idk why it does the funny */}
           </View>
         </View>
       </InnerContainer>

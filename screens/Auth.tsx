@@ -83,9 +83,9 @@ export default function Auth() {
       <StatusBar style="dark"/>
       <InnerContainer>
         <PageLogo resizeMode="cover" source={require('./../assets/FitnessLogo.png')} style={{marginTop: 50, borderRadius: 200, borderWidth: 5, borderColor: 'white',}} />
-        <PageTitle> Vincent Gym </PageTitle>
+        <PageTitle> MoggingFitness </PageTitle>
         <SubTitle> Account Login </SubTitle>
-        <View style={{marginTop: 40, padding: 12}}>
+        <View>
           <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
             <Input
               label="Email"
