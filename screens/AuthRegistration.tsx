@@ -48,7 +48,7 @@ const {brand, darkLight, primary, white} = Colors;
 export default function AuthRegistration() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
-  const [dateOfBirth, setDateOfBirth] = useState(moment().format('DD/MM/YYYY'));
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const navigation = useNavigation();
@@ -130,7 +130,7 @@ export default function AuthRegistration() {
               inputStyle={{ color: 'white' }}
               onChangeText={(text) => setDateOfBirth(text)}
               value={dateOfBirth}
-              placeholder="1/1/2024"
+              placeholder={(moment().format('DD/MM/YYYY'))}
               placeholderTextColor={darkLight}
               autoCapitalize={'none'}
             />

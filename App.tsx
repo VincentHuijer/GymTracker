@@ -39,6 +39,9 @@ import { Session } from '@supabase/supabase-js'
 import { View } from 'react-native'
 import { ThemeContext } from 'styled-components/native';
 import AuthRegistration from './screens/AuthRegistration';
+import { useContext } from 'react';
+
+
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -176,7 +179,6 @@ const AuthMainNavigator = () => {
           component={AuthNavigator}
           options={{ headerShown: false }}
         />
-        {/* Add more screens as needed */}
       </AuthStack.Navigator>
     </NavigationContainer>
   );

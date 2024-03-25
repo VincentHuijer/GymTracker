@@ -22,7 +22,7 @@ import {
   ExtraText,
   TextLinkContent,
   TextLink
-} from './../components/styles';
+} from '../components/styles';
 import { StatusBar } from "expo-status-bar";
 import { Formik } from 'formik';
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
@@ -118,6 +118,9 @@ export default function Auth() {
           </View>
           <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
             <Button title="Sign up" disabled={loading} onPress={() => navigation.navigate('AuthRegistration')}/> {/*Works despite being red. Idk why it does the funny */}
+          </View>
+          <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
+            <Button buttonStyle={{backgroundColor: '#10B981'}}  title="Sign in with Google" disabled={loading}></Button>
           </View>
         </View>
       </InnerContainer>
