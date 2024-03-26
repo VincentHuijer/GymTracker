@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "GymTracker",
-    "slug": "GymTracker",
+    "slug": "moggingfitness",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b6dd605a-79dd-43a4-9258-9bd77fb4f0b6"
+      }
+    },
+    "owner": "vincenthuijer"
   }
 }
