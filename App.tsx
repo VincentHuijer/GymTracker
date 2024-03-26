@@ -87,7 +87,6 @@ const ProfileNavigator = ()  => (
     <ProfileStack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Account" component={Account} options={{ headerShown: false }} />
-    {/* <ProfileStack.Screen name="Account"  component={() => <Account session={session} />} options={{ headerShown: false }} /> */}
   </ProfileStack.Navigator>
 );
 
@@ -113,59 +112,58 @@ const AuthNavigator = () => (
 
 
 const MainNavigator = ({ session }: { session: Session }) => {
-
   return (
     <SessionContext.Provider value={{ session, setSession }}>
-    <NavigationContainer>
-      <Tab.Navigator >
-        <Tab.Screen
-          name="Home"
-          component={HomeNavigator}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <HomeTabIcon color={color} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-            name="Calendar"
-            component={CalendarScreen}
+      <NavigationContainer>
+        <Tab.Navigator >
+          <Tab.Screen
+            name="Home"
+            component={HomeNavigator}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <CalendarTabIcon color={color} size={size} />
+                <HomeTabIcon color={color} size={size} />
               ),
             }}
-        />
-        <Tab.Screen
-        name="Workout"
-        component={WorkoutsNavigator} 
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <WorkoutsTabIconDumbell color={color} size={size} />
-          ),
-        }}
-      />
-        <Tab.Screen
-          name="Progress"
-          component={ProgressScreen}
+          />
+          <Tab.Screen
+              name="Calendar"
+              component={CalendarScreen}
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <CalendarTabIcon color={color} size={size} />
+                ),
+              }}
+          />
+          <Tab.Screen
+          name="Workout"
+          component={WorkoutsNavigator} 
           options={{
             tabBarIcon: ({ color, size }) => (
-              <ProgressTabIcon color={color} size={size}/>
+              <WorkoutsTabIconDumbell color={color} size={size} />
             ),
           }}
         />
-        <Tab.Screen
-          name="Profile"
-          component={ProfileNavigator}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <ProfileTabIcon color={color} size={size} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
-  </SessionContext.Provider>
+          <Tab.Screen
+            name="Progress"
+            component={ProgressScreen}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <ProgressTabIcon color={color} size={size}/>
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={ProfileNavigator}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <ProfileTabIcon color={color} size={size} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SessionContext.Provider>
   );
 };
 

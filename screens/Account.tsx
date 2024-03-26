@@ -6,7 +6,7 @@ import { Session } from '@supabase/supabase-js'
 import { SessionContext } from '../SessionContext'
 
 export default function Account() {
-  const { session } = useContext(SessionContext); // Consuming the session context
+  const { session } = useContext(SessionContext);
 
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
