@@ -31,6 +31,12 @@
         "projectId": "b6dd605a-79dd-43a4-9258-9bd77fb4f0b6"
       }
     },
-    "owner": "vincenthuijer"
+    "owner": "vincenthuijer",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b6dd605a-79dd-43a4-9258-9bd77fb4f0b6"
+    }
   }
 }
