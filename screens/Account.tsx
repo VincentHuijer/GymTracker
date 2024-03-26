@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { supabase } from '../lib/supabase'
 import { StyleSheet, View, Alert, Text } from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
+import { SessionContext } from '../SessionContext'
 
-export default function Account({ session }: { session: Session }) {
+export default function Account() {
+  const { session } = useContext(SessionContext); // Consuming the session context
+
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
   // const [website, setWebsite] = useState('')

@@ -40,6 +40,7 @@ import { View } from 'react-native'
 import { ThemeContext } from 'styled-components/native';
 import AuthRegistration from './screens/AuthRegistration';
 import { useContext } from 'react';
+import { SessionContext } from './SessionContext';
 
 
 
@@ -77,18 +78,16 @@ const WorkoutsNavigator = () => (
   </WorkoutsStack.Navigator>
 );
 
-interface ProfileNavigatorProps {
-  session: Session;
-}
 
-const ProfileNavigator: React.FC<ProfileNavigatorProps> = ({ session }) => (
+
+const ProfileNavigator = ()  => (
   <ProfileStack.Navigator screenOptions={{}}>
     <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
     <ProfileStack.Screen name="Login" component={Login} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
     <ProfileStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
-    {/* <ProfileStack.Screen name="Account" component={Account} options={{ headerShown: false }} /> */}
-    <ProfileStack.Screen name="Account"  component={() => <Account session={session} />} options={{ headerShown: false }} />
+    <ProfileStack.Screen name="Account" component={Account} options={{ headerShown: false }} />
+    {/* <ProfileStack.Screen name="Account"  component={() => <Account session={session} />} options={{ headerShown: false }} /> */}
   </ProfileStack.Navigator>
 );
 
@@ -116,7 +115,7 @@ const AuthNavigator = () => (
 const MainNavigator = ({ session }: { session: Session }) => {
 
   return (
-  <ThemeContext.Provider value={session}>
+    <SessionContext.Provider value={{ session, setSession }}>
     <NavigationContainer>
       <Tab.Navigator >
         <Tab.Screen
@@ -157,7 +156,7 @@ const MainNavigator = ({ session }: { session: Session }) => {
         />
         <Tab.Screen
           name="Profile"
-          component={() => <ProfileNavigator session={session} />}
+          component={ProfileNavigator}
           options={{
             tabBarIcon: ({ color, size }) => (
               <ProfileTabIcon color={color} size={size} />
@@ -166,7 +165,7 @@ const MainNavigator = ({ session }: { session: Session }) => {
         />
       </Tab.Navigator>
     </NavigationContainer>
-  </ThemeContext.Provider>
+  </SessionContext.Provider>
   );
 };
 
