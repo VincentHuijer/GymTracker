@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Alert, StyleSheet, View, AppState, TouchableOpacity} from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input } from 'react-native-elements'
+import * as WebBrowser from "expo-web-browser"
 import { 
   StyledContainer, 
   InnerContainer, 
@@ -26,7 +27,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Formik } from 'formik';
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AuthRegistration from './AuthRegistration';
@@ -62,9 +63,43 @@ export default function Auth() {
     }
   }, [response]);
 
+
+  React.useEffect(() => {
+    (async function(){
+      let user = await supabase.auth.getUser()
+
+      console.log(user);
+    }())
+  }, [])
+  
+
   async function signInWithGoogle(idToken) {
-    try {
-      const { user, error } = await supabase.auth.signIn({ provider: 'google', token: idToken });
+
+    const { data, session, error } = await supabase.auth.signInWithOAuth({ provider: 'google', options:{
+      redirectTo: window.location.href,
+      skipBrowserRedirect: true
+    }});
+
+
+    const result = await WebBrowser.openAuthSessionAsync(
+data.url,
+      window.location.href,
+      {
+        preferEphemeralSession: true
+      }
+    )
+    console.log(result);
+
+
+    //open page in current view, redirect back to current page
+
+  // get user with supabase auth getuser
+
+    return 
+    try {F
+      const { user, error } = await supabase.auth.signInWithOAuth({ provider: 'google', options:{
+        redirectTo: window.location.href
+      }});
       if (error) {
         Alert.alert('Error signing in with Google');
       } else {
@@ -149,9 +184,18 @@ export default function Auth() {
               buttonStyle={{ backgroundColor: '#10B981' }}
               title="Sign in with Google"
               disabled={loading || response?.type === 'loading'}
-              onPress={() => promptAsync()}
+              onPress={() => signInWithGoogle()}
             /> 
           </View>
+          <View style={{paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20}}>
+            <Button
+              buttonStyle={{ backgroundColor: '#6C5CE7' }}
+              title="Sign in with Passkeys"
+              disabled={loading}
+              onPress={() => signInWithPasskeys()} 
+            /> 
+          </View>
+
         </View>
       </InnerContainer>
     </StyledContainer>
