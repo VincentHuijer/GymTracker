@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import { supabase } from '../../lib/supabase';
+import moment from 'moment';
+import { SessionContext } from '../../SessionContext';
 
 const BodyWeightScreen = () => {
+  const { session } = useContext(SessionContext);
   const [weight, setWeight] = useState('');
   const [notes, setNotes] = useState('');
   const [dateTime, setDateTime] = useState('');
 
   const handleSaveWeight = async () => {
     try {
+      const formattedDateTime = moment(dateTime).format('DD/MM/YYYY HH:mm:ss');
       const { data, error } = await supabase
-        .from('weights')
-        .insert([{ weight: parseFloat(weight), notes, recorded_at: new Date(dateTime) }]);
+        .from('BodyWeightTracker') // Change table name here
+        .insert([{ weight: parseFloat(weight), notes, recorded_at: formattedDateTime }]);
 
       if (error) {
         console.error('Error saving weight:', error.message);
