@@ -103,7 +103,6 @@ data.url,
       if (error) {
         Alert.alert('Error signing in with Google');
       } else {
-        // Handle successful sign-in
         console.log('Signed in with Google:', user);
       }
     } catch (error) {

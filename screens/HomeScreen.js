@@ -64,7 +64,7 @@ const HomeScreen = () => {
 
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 70, marginBottom: 15, alignContent: 'center'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('addExerciseListScreen')}>
+          <TouchableOpacity onPress={() => navigation.navigate('BodyWeightScreen')}>
             <View style={{backgroundColor: 'white',  paddingVertical: 40, paddingHorizontal: 31, borderRadius: 9}}>
               <View style={{alignItems: 'center'}}> {/*icon didnt wanna go to the center for some reason*/}
                 <BalanceScaleIcon style={{ width: 40, height: 40, marginBottom: 2 }} />

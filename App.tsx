@@ -41,6 +41,7 @@ import { ThemeContext } from 'styled-components/native';
 import AuthRegistration from './screens/AuthRegistration';
 import { useContext } from 'react';
 import { SessionContext } from './SessionContext';
+import BodyWeightScreen from './screens/workoutScreens/BodyWeightScreen';
 
 
 
@@ -97,6 +98,7 @@ const HomeNavigator = () => (
     <HomeStack.Screen name="MyWorkouts" component={MyWorkoutsScreen} options={{ headerShown: false }}/>
     <HomeStack.Screen name="NonGenericWorkout" component={NonGenericWorkout} options={{ headerShown: false }}/>
     <HomeStack.Screen name="AddExerciseListScreen" component={AddExerciseListScreen} options={{ headerShown: false }}/>
+    <HomeStack.Screen name="BodyWeightScreen" component={BodyWeightScreen} options={{ headerShown: false }}/>
   </HomeStack.Navigator>
 );
 
