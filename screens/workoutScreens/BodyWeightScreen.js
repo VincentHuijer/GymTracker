@@ -44,7 +44,6 @@ const BodyWeightScreen = () => {
   };
 
   const formatData = (bodyWeights) => {
-    // Group data by month
     const groupedData = {};
     bodyWeights.forEach((entry) => {
       const month = moment(entry.recorded_at).format('MMMM YYYY');
@@ -54,7 +53,6 @@ const BodyWeightScreen = () => {
       groupedData[month].push(entry);
     });
 
-    // Calculate weight difference and last weight for each month
     const formattedData = Object.keys(groupedData).map((month) => {
       const entries = groupedData[month];
       const lastWeight = entries[0].weight;
@@ -115,7 +113,7 @@ const BodyWeightScreen = () => {
                 <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>{`${monthData.weightDifference.toFixed(
                   1
                 )}kg`}</Text>
-                <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
+                <Text style={{ fontSize: 24, color: 'white' }}>{`${parseFloat(monthData.lastWeight).toFixed(1)}kg`}</Text>
                 <ChevronDown />
               </View>
               {monthData.entries.map((entry, index) => (
@@ -130,13 +128,15 @@ const BodyWeightScreen = () => {
                       paddingVertical: 10,
                     }}>
                     <Text style={{ fontSize: 20, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
-                    {entry.notes && <FileTextIcon />}
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      {entry.notes ? <FileTextIcon /> : <View style={{ width: 24 }} />}
+                    </View>
                     {index < monthData.entries.length - 1 && (
                       <Text style={{ fontSize: 20, color: '#E43D32', marginLeft: 10 }}>
-                        {`${(entry.weight - monthData.entries[index + 1].weight).toFixed(1)}kg`}
+                      {`${(parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)).toFixed(1)}kg`}
                       </Text>
                     )}
-                    <Text style={{ fontSize: 20, color: 'white' }}>{`${entry.weight}kg`}</Text>
+                    <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
                     <PencilIcon />
                   </View>
                   {index !== monthData.entries.length - 1 && <ThinLine />}
