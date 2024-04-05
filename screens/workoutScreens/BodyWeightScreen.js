@@ -6,6 +6,7 @@ import { SessionContext } from '../../SessionContext';
 import { useContext } from 'react';
 import ThinLine from '../../components/ThinLine';
 import { ChevronDown, FileTextIcon, PencilIcon } from '../../assets/SvgIcons';
+import WhiteTextButtonNew from '../../components/WhiteTextButtonNew';
 
 const BodyWeightScreen = () => {
   const { session } = useContext(SessionContext);
@@ -98,53 +99,59 @@ const BodyWeightScreen = () => {
   };
 
   return (
-    <ScrollView>
-    <View style={{ backgroundColor: '#1C1C1E' }}>
-      {monthlyData.map((monthData) => (
-        <View key={monthData.month}>
-          <View
-            style={{
-              backgroundColor: '#252429',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-            }}>
-            <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
-            <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>{`${monthData.weightDifference.toFixed(
-              1
-            )}kg`}</Text>
-            <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
-            <ChevronDown />
-          </View>
-          {monthData.entries.map((entry, index) => (
-            <View
-              key={index}
-              style={{
-                backgroundColor: '#46454C',
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                alignItems: 'center',
-                paddingVertical: 10,
-              }}>
-              <Text style={{ fontSize: 20, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
-              {entry.notes && <FileTextIcon />}
-              {index < monthData.entries.length - 1 && (
-                <Text style={{ fontSize: 20, color: '#E43D32', marginLeft: 10 }}>
-                  {`${(entry.weight - monthData.entries[index + 1].weight).toFixed(1)}kg`}
-                </Text>
-              )}
-              <Text style={{ fontSize: 20, color: 'white' }}>{`${entry.weight}kg`}</Text>
-              <PencilIcon />
+    <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ backgroundColor: '#1C1C1E' }}>
+          {monthlyData.map((monthData) => (
+            <View key={monthData.month}>
+              <View
+                style={{
+                  backgroundColor: '#252429',
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+                }}>
+                <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
+                <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>{`${monthData.weightDifference.toFixed(
+                  1
+                )}kg`}</Text>
+                <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
+                <ChevronDown />
+              </View>
+              {monthData.entries.map((entry, index) => (
+                <View>
+                  <View
+                    key={index}
+                    style={{
+                      backgroundColor: '#46454C',
+                      flexDirection: 'row',
+                      justifyContent: 'space-evenly',
+                      alignItems: 'center',
+                      paddingVertical: 10,
+                    }}>
+                    <Text style={{ fontSize: 20, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
+                    {entry.notes && <FileTextIcon />}
+                    {index < monthData.entries.length - 1 && (
+                      <Text style={{ fontSize: 20, color: '#E43D32', marginLeft: 10 }}>
+                        {`${(entry.weight - monthData.entries[index + 1].weight).toFixed(1)}kg`}
+                      </Text>
+                    )}
+                    <Text style={{ fontSize: 20, color: 'white' }}>{`${entry.weight}kg`}</Text>
+                    <PencilIcon />
+                  </View>
+                  {index !== monthData.entries.length - 1 && <ThinLine />}
+                </View>
+              ))}
             </View>
           ))}
+          <TextInput value={weight} onChangeText={setWeight} keyboardType="numeric" placeholder="Enter weight" />
+          <TextInput value={notes} onChangeText={setNotes} placeholder="Enter notes" />
+          <TextInput value={dateTime} onChangeText={setDateTime} placeholder="Enter date & time" />
+          <Button title="Save Weight" onPress={handleSaveWeight} />
         </View>
-      ))}
-      <TextInput value={weight} onChangeText={setWeight} keyboardType="numeric" placeholder="Enter weight" />
-      <TextInput value={notes} onChangeText={setNotes} placeholder="Enter notes" />
-      <TextInput value={dateTime} onChangeText={setDateTime} placeholder="Enter date & time" />
-      <Button title="Save Weight" onPress={handleSaveWeight} />
+      </ScrollView>
+      <WhiteTextButtonNew text={'new entry'} onPress={() => navigation.navigate('NewEntry')}/>
     </View>
-    </ScrollView>
   );
 };
 
