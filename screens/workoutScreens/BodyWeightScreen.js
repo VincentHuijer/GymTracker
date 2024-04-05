@@ -119,52 +119,51 @@ const BodyWeightScreen = () => {
         <View style={{ backgroundColor: '#1C1C1E' }}>
           {monthlyData.map((monthData) => (
             <View>
-  <View
-    style={{
-      backgroundColor: '#252429',
-      flexDirection: 'row',
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-    }}
-  >
-    <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
-    <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>
-      {`${monthData.weightDifference.toFixed(1)}kg`}
-    </Text>
-    <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
-    <TouchableOpacity onPress={() => toggleVisibility(monthData.month)}>
-      {visibleEntries[monthData.month] ? <ChevronUp /> : <ChevronDown />}
-    </TouchableOpacity>
-  </View>
-  {visibleEntries[monthData.month] && (
-    // Render entries only if they are visible
-    monthData.entries.map((entry, index) => (
-                <View>
-                  <View
-                    key={index}
-                    style={{
-                      backgroundColor: '#46454C',
-                      flexDirection: 'row',
-                      justifyContent: 'space-evenly',
-                      alignItems: 'center',
-                      paddingVertical: 10,
-                    }}>
-                    <Text style={{ fontSize: 20, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      {entry.notes ? <FileTextIcon /> : <View style={{ width: 24 }} />}
+              <View
+                style={{
+                  backgroundColor: '#252429',
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+                }}
+              >
+                <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
+                <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>
+                  {`${monthData.weightDifference.toFixed(1)}kg`}
+                </Text>
+                <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
+                <TouchableOpacity onPress={() => toggleVisibility(monthData.month)}>
+                  {visibleEntries[monthData.month] ? <ChevronUp /> : <ChevronDown />}
+                </TouchableOpacity>
+              </View>
+              {visibleEntries[monthData.month] && (
+                monthData.entries.map((entry, index) => (
+                  <View>
+                    <View
+                      key={index}
+                      style={{
+                        backgroundColor: '#46454C',
+                        flexDirection: 'row',
+                        justifyContent: 'space-evenly',
+                        alignItems: 'center',
+                        paddingVertical: 10,
+                      }}>
+                      <Text style={{ fontSize: 20, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
+                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        {entry.notes ? <FileTextIcon /> : <View style={{ width: 24 }} />}
+                      </View>
+                      {index < monthData.entries.length - 1 && (
+                        <Text style={{ fontSize: 20, color: '#E43D32', marginLeft: 10 }}>
+                        {`${(parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)).toFixed(1)}kg`}
+                        </Text>
+                      )}
+                      <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
+                      <PencilIcon />
                     </View>
-                    {index < monthData.entries.length - 1 && (
-                      <Text style={{ fontSize: 20, color: '#E43D32', marginLeft: 10 }}>
-                      {`${(parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)).toFixed(1)}kg`}
-                      </Text>
-                    )}
-                    <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
-                    <PencilIcon />
+                    {index !== monthData.entries.length - 1 && <ThinLine />}
                   </View>
-                  {index !== monthData.entries.length - 1 && <ThinLine />}
-                </View>
-    )
-              ))}
+                ))
+              )}
             </View>
           ))}
           <TextInput value={weight} onChangeText={setWeight} keyboardType="numeric" placeholder="Enter weight" />
