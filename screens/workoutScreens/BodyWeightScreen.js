@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, TextInput, Button, ScrollView } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import moment from 'moment';
 import { SessionContext } from '../../SessionContext';
@@ -12,30 +12,57 @@ const BodyWeightScreen = () => {
   const [weight, setWeight] = useState('');
   const [notes, setNotes] = useState('');
   const [dateTime, setDateTime] = useState('');
-  const [weightData, setWeightData] = useState([]);
-
+  const [monthlyData, setMonthlyData] = useState([]);
 
   useEffect(() => {
-    async function fetchWeightData() {
-      try {
-        const { data, error } = await supabase
-          .from('BodyWeightTracker')
-          .select('*')
-          .order('recorded_at', { ascending: false }); // Order by recorded_at descending
+    fetchData();
+  }, []);
 
-        if (error) {
-          console.error('Error fetching weight data:', error.message);
-        } else {
-          setWeightData(data);
-        }
-      } catch (error) {
-        console.error('Error fetching weight data:', error.message);
+  const fetchData = async () => {
+    try {
+      if (!session || !session.user) {
+        console.error('No user session found.');
+        return;
       }
+
+      const { data: bodyWeights, error } = await supabase
+        .from('BodyWeightTracker')
+        .select('*')
+        .eq('userid', session.user.id)
+        .order('recorded_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching data:', error.message);
+      } else {
+        const formattedData = formatData(bodyWeights);
+        setMonthlyData(formattedData);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
     }
+  };
 
-    fetchWeightData();
-  }, []); 
+  const formatData = (bodyWeights) => {
+    // Group data by month
+    const groupedData = {};
+    bodyWeights.forEach((entry) => {
+      const month = moment(entry.recorded_at).format('MMMM YYYY');
+      if (!groupedData[month]) {
+        groupedData[month] = [];
+      }
+      groupedData[month].push(entry);
+    });
 
+    // Calculate weight difference and last weight for each month
+    const formattedData = Object.keys(groupedData).map((month) => {
+      const entries = groupedData[month];
+      const lastWeight = entries[0].weight;
+      const weightDifference = entries[0].weight - entries[entries.length - 1].weight;
+      return { month, lastWeight, weightDifference, entries };
+    });
+
+    return formattedData;
+  };
 
   const handleSaveWeight = async () => {
     try {
@@ -43,25 +70,27 @@ const BodyWeightScreen = () => {
         console.error('No user session found.');
         return;
       }
-      
-      const formattedDateTime = moment(dateTime).format('DD/MM/YYYY HH:mm:ss');
+
+      const formattedDateTime = moment(dateTime).format('YYYY-MM-DD HH:mm:ss');
       const { data, error } = await supabase
         .from('BodyWeightTracker')
-        .insert([{ 
-          weight: parseFloat(weight), 
-          notes, 
-          recorded_at: formattedDateTime,
-          userid: session.user.id
-        }]);
+        .insert([
+          {
+            weight: parseFloat(weight),
+            notes,
+            recorded_at: formattedDateTime,
+            userid: session.user.id,
+          },
+        ]);
 
       if (error) {
         console.error('Error saving weight:', error.message);
       } else {
         console.log('Weight saved successfully:', data);
-        // Optionally, you can reset the form fields after successful submission
         setWeight('');
         setNotes('');
         setDateTime('');
+        fetchData(); // Refresh data after saving
       }
     } catch (error) {
       console.error('Error saving weight:', error.message);
@@ -69,46 +98,53 @@ const BodyWeightScreen = () => {
   };
 
   return (
-    <View style={{backgroundColor: '#1C1C1E'}}>
-      <View>
-        <View style={{backgroundColor: '#252429', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}}>
-          <Text style={{fontSize: 24, color: 'white'}}>Januari 2024</Text>
-          <Text style={{fontSize: 24, color: '#5BE432', marginLeft: 10}}>-4,3kg</Text>
-          <Text style={{fontSize: 24, color: 'white'}}>94,6kg</Text>
-          <ChevronDown/>
-        </View>
-        <>
-      {weightData.map((entry, index) => (
-        <View key={index} style={{backgroundColor: '#46454C', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', paddingVertical: 10}}>
-          <Text style={{fontSize: 20, color: 'white'}}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text> 
-          {entry.notes && <FileTextIcon />} 
-          {index > 0 && <Text style={{fontSize: 20, color: '#E43D32', marginLeft: 10}}>{(entry.weight - weightData[index - 1].weight).toFixed(1)}kg</Text>} {/* Show difference in weight if not the first entry */}
-          <Text style={{fontSize: 20, color: 'white'}}>{entry.weight}kg</Text>
-          <PencilIcon />
+    <ScrollView>
+    <View style={{ backgroundColor: '#1C1C1E' }}>
+      {monthlyData.map((monthData) => (
+        <View key={monthData.month}>
+          <View
+            style={{
+              backgroundColor: '#252429',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+            }}>
+            <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
+            <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>{`${monthData.weightDifference.toFixed(
+              1
+            )}kg`}</Text>
+            <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
+            <ChevronDown />
+          </View>
+          {monthData.entries.map((entry, index) => (
+            <View
+              key={index}
+              style={{
+                backgroundColor: '#46454C',
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+                paddingVertical: 10,
+              }}>
+              <Text style={{ fontSize: 20, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
+              {entry.notes && <FileTextIcon />}
+              {index < monthData.entries.length - 1 && (
+                <Text style={{ fontSize: 20, color: '#E43D32', marginLeft: 10 }}>
+                  {`${(entry.weight - monthData.entries[index + 1].weight).toFixed(1)}kg`}
+                </Text>
+              )}
+              <Text style={{ fontSize: 20, color: 'white' }}>{`${entry.weight}kg`}</Text>
+              <PencilIcon />
+            </View>
+          ))}
         </View>
       ))}
-      <ThinLine />
-    </>
-        </View>
-
-      <TextInput
-        value={weight}
-        onChangeText={setWeight}
-        keyboardType="numeric"
-        placeholder="Enter weight"
-      />
-      <TextInput
-        value={notes}
-        onChangeText={setNotes}
-        placeholder="Enter notes"
-      />
-      <TextInput
-        value={dateTime}
-        onChangeText={setDateTime}
-        placeholder="Enter date & time"
-      />
+      <TextInput value={weight} onChangeText={setWeight} keyboardType="numeric" placeholder="Enter weight" />
+      <TextInput value={notes} onChangeText={setNotes} placeholder="Enter notes" />
+      <TextInput value={dateTime} onChangeText={setDateTime} placeholder="Enter date & time" />
       <Button title="Save Weight" onPress={handleSaveWeight} />
     </View>
+    </ScrollView>
   );
 };
 
