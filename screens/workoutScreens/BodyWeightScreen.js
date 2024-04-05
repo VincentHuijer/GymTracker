@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import moment from 'moment';
@@ -12,6 +12,7 @@ const BodyWeightScreen = () => {
   const [weight, setWeight] = useState('');
   const [notes, setNotes] = useState('');
   const [dateTime, setDateTime] = useState('');
+  const [weightData, setWeightData] = useState([]);
 
 
   useEffect(() => {
@@ -76,14 +77,18 @@ const BodyWeightScreen = () => {
           <Text style={{fontSize: 24, color: 'white'}}>94,6kg</Text>
           <ChevronDown/>
         </View>
-        <View style={{backgroundColor: '#46454C', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', paddingVertical: 10}}>
-          <Text style={{fontSize: 20, color: 'white'}}> 1/14 </Text>
-          <FileTextIcon/>
-          <Text style={{fontSize: 20, color: '#E43D32', marginLeft: 10}}>-4,3kg</Text>
-          <Text style={{fontSize: 20, color: 'white'}}> 95kg </Text>
-          <PencilIcon/>
+        <>
+      {weightData.map((entry, index) => (
+        <View key={index} style={{backgroundColor: '#46454C', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', paddingVertical: 10}}>
+          <Text style={{fontSize: 20, color: 'white'}}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text> 
+          {entry.notes && <FileTextIcon />} 
+          {index > 0 && <Text style={{fontSize: 20, color: '#E43D32', marginLeft: 10}}>{(entry.weight - weightData[index - 1].weight).toFixed(1)}kg</Text>} {/* Show difference in weight if not the first entry */}
+          <Text style={{fontSize: 20, color: 'white'}}>{entry.weight}kg</Text>
+          <PencilIcon />
         </View>
-        <ThinLine/>
+      ))}
+      <ThinLine />
+    </>
         </View>
 
       <TextInput
