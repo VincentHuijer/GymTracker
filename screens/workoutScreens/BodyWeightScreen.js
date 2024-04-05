@@ -106,7 +106,7 @@ const BodyWeightScreen = () => {
         setWeight('');
         setNotes('');
         setDateTime('');
-        fetchData(); // Refresh data after saving
+        fetchData(); 
       }
     } catch (error) {
       console.error('Error saving weight:', error.message);
