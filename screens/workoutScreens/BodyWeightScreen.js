@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, Button, ScrollView } from 'react-native';
+import { Text, View, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { supabase } from '../../lib/supabase';
 import moment from 'moment';
 import { SessionContext } from '../../SessionContext';
 import { useContext } from 'react';
 import ThinLine from '../../components/ThinLine';
-import { ChevronDown, FileTextIcon, PencilIcon } from '../../assets/SvgIcons';
+import { ChevronDown, ChevronUp, FileTextIcon, PencilIcon } from '../../assets/SvgIcons';
 import WhiteTextButtonNew from '../../components/WhiteTextButtonNew';
 
 const BodyWeightScreen = () => {
@@ -14,6 +14,23 @@ const BodyWeightScreen = () => {
   const [notes, setNotes] = useState('');
   const [dateTime, setDateTime] = useState('');
   const [monthlyData, setMonthlyData] = useState([]);
+  const [visibleEntries, setVisibleEntries] = useState({});
+
+  useEffect(() => {
+    const initialVisibility = {};
+    monthlyData.forEach((monthData) => {
+      initialVisibility[monthData.month] = true;
+    });
+    setVisibleEntries(initialVisibility);
+  }, [monthlyData]);
+
+  const toggleVisibility = (month) => {
+    setVisibleEntries((prevVisibility) => ({
+      ...prevVisibility,
+      [month]: !prevVisibility[month],
+    }));
+  };
+
 
   useEffect(() => {
     fetchData();
@@ -101,22 +118,27 @@ const BodyWeightScreen = () => {
       <ScrollView style={{ flex: 1 }}>
         <View style={{ backgroundColor: '#1C1C1E' }}>
           {monthlyData.map((monthData) => (
-            <View key={monthData.month}>
-              <View
-                style={{
-                  backgroundColor: '#252429',
-                  flexDirection: 'row',
-                  justifyContent: 'space-evenly',
-                  alignItems: 'center',
-                }}>
-                <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
-                <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>{`${monthData.weightDifference.toFixed(
-                  1
-                )}kg`}</Text>
-                <Text style={{ fontSize: 24, color: 'white' }}>{`${parseFloat(monthData.lastWeight).toFixed(1)}kg`}</Text>
-                <ChevronDown />
-              </View>
-              {monthData.entries.map((entry, index) => (
+            <View>
+  <View
+    style={{
+      backgroundColor: '#252429',
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      alignItems: 'center',
+    }}
+  >
+    <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
+    <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>
+      {`${monthData.weightDifference.toFixed(1)}kg`}
+    </Text>
+    <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
+    <TouchableOpacity onPress={() => toggleVisibility(monthData.month)}>
+      {visibleEntries[monthData.month] ? <ChevronUp /> : <ChevronDown />}
+    </TouchableOpacity>
+  </View>
+  {visibleEntries[monthData.month] && (
+    // Render entries only if they are visible
+    monthData.entries.map((entry, index) => (
                 <View>
                   <View
                     key={index}
@@ -141,6 +163,7 @@ const BodyWeightScreen = () => {
                   </View>
                   {index !== monthData.entries.length - 1 && <ThinLine />}
                 </View>
+    )
               ))}
             </View>
           ))}
