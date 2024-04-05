@@ -4,12 +4,37 @@ import { supabase } from '../../lib/supabase';
 import moment from 'moment';
 import { SessionContext } from '../../SessionContext';
 import { useContext } from 'react';
+import ThinLine from '../../components/ThinLine';
+import { ChevronDown, FileTextIcon, PencilIcon } from '../../assets/SvgIcons';
 
 const BodyWeightScreen = () => {
   const { session } = useContext(SessionContext);
   const [weight, setWeight] = useState('');
   const [notes, setNotes] = useState('');
   const [dateTime, setDateTime] = useState('');
+
+
+  useEffect(() => {
+    async function fetchWeightData() {
+      try {
+        const { data, error } = await supabase
+          .from('BodyWeightTracker')
+          .select('*')
+          .order('recorded_at', { ascending: false }); // Order by recorded_at descending
+
+        if (error) {
+          console.error('Error fetching weight data:', error.message);
+        } else {
+          setWeightData(data);
+        }
+      } catch (error) {
+        console.error('Error fetching weight data:', error.message);
+      }
+    }
+
+    fetchWeightData();
+  }, []); 
+
 
   const handleSaveWeight = async () => {
     try {
@@ -43,7 +68,24 @@ const BodyWeightScreen = () => {
   };
 
   return (
-    <View>
+    <View style={{backgroundColor: '#1C1C1E'}}>
+      <View>
+        <View style={{backgroundColor: '#252429', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}}>
+          <Text style={{fontSize: 24, color: 'white'}}>Januari 2024</Text>
+          <Text style={{fontSize: 24, color: '#5BE432', marginLeft: 10}}>-4,3kg</Text>
+          <Text style={{fontSize: 24, color: 'white'}}>94,6kg</Text>
+          <ChevronDown/>
+        </View>
+        <View style={{backgroundColor: '#46454C', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', paddingVertical: 10}}>
+          <Text style={{fontSize: 20, color: 'white'}}> 1/14 </Text>
+          <FileTextIcon/>
+          <Text style={{fontSize: 20, color: '#E43D32', marginLeft: 10}}>-4,3kg</Text>
+          <Text style={{fontSize: 20, color: 'white'}}> 95kg </Text>
+          <PencilIcon/>
+        </View>
+        <ThinLine/>
+        </View>
+
       <TextInput
         value={weight}
         onChangeText={setWeight}
