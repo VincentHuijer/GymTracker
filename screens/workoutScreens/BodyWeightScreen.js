@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import ThinLine from '../../components/ThinLine';
 import { ChevronDown, ChevronUp, FileTextIcon, PencilIcon } from '../../assets/SvgIcons';
 import WhiteTextButtonNew from '../../components/WhiteTextButtonNew';
+import NewEntryModal from '../../components/NewEntryModal';
 
 const BodyWeightScreen = () => {
   const { session } = useContext(SessionContext);
@@ -15,8 +16,9 @@ const BodyWeightScreen = () => {
   const [dateTime, setDateTime] = useState('');
   const [monthlyData, setMonthlyData] = useState([]);
   const [visibleEntries, setVisibleEntries] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => { //show/hide months with chevron
     const initialVisibility = {};
     monthlyData.forEach((monthData) => {
       initialVisibility[monthData.month] = true;
@@ -81,6 +83,7 @@ const BodyWeightScreen = () => {
   };
 
   const handleSaveWeight = async () => {
+   
     try {
       if (!session || !session.user) {
         console.error('No user session found.');
@@ -106,7 +109,8 @@ const BodyWeightScreen = () => {
         setWeight('');
         setNotes('');
         setDateTime('');
-        fetchData(); 
+        fetchData();
+        setModalVisible(false);
       }
     } catch (error) {
       console.error('Error saving weight:', error.message);
@@ -128,9 +132,10 @@ const BodyWeightScreen = () => {
                 }}
               >
                 <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
-                <Text style={{ fontSize: 24, color: '#5BE432', marginLeft: 10 }}>
+                <Text style={{ fontSize: 24, color: parseFloat(monthData.weightDifference) < 0 ? '#5BE432' : '#E43D32', marginLeft: 10 }}>
                   {`${monthData.weightDifference.toFixed(1)}kg`}
                 </Text>
+
                 <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
                 <TouchableOpacity onPress={() => toggleVisibility(monthData.month)}>
                   {visibleEntries[monthData.month] ? <ChevronUp /> : <ChevronDown />}
@@ -153,8 +158,12 @@ const BodyWeightScreen = () => {
                         {entry.notes ? <FileTextIcon /> : <View style={{ width: 24 }} />}
                       </View>
                       {index < monthData.entries.length - 1 && (
-                        <Text style={{ fontSize: 20, color: '#E43D32', marginLeft: 10 }}>
-                        {`${(parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)).toFixed(1)}kg`}
+                        <Text style={{ 
+                          fontSize: 20, 
+                          color: ((parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)) < 0) ? '#5BE432' : '#E43D32', 
+                          marginLeft: 10 
+                        }}>
+                          {`${(parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)).toFixed(1)}kg`}
                         </Text>
                       )}
                       <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
@@ -166,13 +175,23 @@ const BodyWeightScreen = () => {
               )}
             </View>
           ))}
-          <TextInput value={weight} onChangeText={setWeight} keyboardType="numeric" placeholder="Enter weight" />
-          <TextInput value={notes} onChangeText={setNotes} placeholder="Enter notes" />
-          <TextInput value={dateTime} onChangeText={setDateTime} placeholder="Enter date & time" />
-          <Button title="Save Weight" onPress={handleSaveWeight} />
+         
         </View>
       </ScrollView>
-      <WhiteTextButtonNew text={'new entry'} onPress={() => navigation.navigate('NewEntry')}/>
+      <View style={{justifyContent: 'center', alignItems: 'center' }}>
+        <WhiteTextButtonNew text={'new entry'} onPress={() => setModalVisible(true)} />
+        <NewEntryModal 
+          visible={modalVisible} 
+          onClose={() => setModalVisible(false)} 
+          onSave={handleSaveWeight} 
+          weight={weight} 
+          setWeight={setWeight} 
+          notes={notes} 
+          setNotes={setNotes} 
+          dateTime={dateTime} 
+          setDateTime={setDateTime} 
+        />
+      </View>
     </View>
   );
 };
