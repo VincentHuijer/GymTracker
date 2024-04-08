@@ -13,7 +13,7 @@ const BodyWeightScreen = () => {
   const { session } = useContext(SessionContext);
   const [weight, setWeight] = useState('');
   const [notes, setNotes] = useState('');
-  const [dateTime, setDateTime] = useState('');
+  const [dateTime, setDateTime] = useState(moment().format('YYYY-MM-DD HH:MM:ss'));
   const [monthlyData, setMonthlyData] = useState([]);
   const [visibleEntries, setVisibleEntries] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
@@ -178,19 +178,19 @@ const BodyWeightScreen = () => {
          
         </View>
       </ScrollView>
-      <View style={{justifyContent: 'center', alignItems: 'center' }}>
-        <WhiteTextButtonNew text={'new entry'} onPress={() => setModalVisible(true)} />
-        <NewEntryModal 
-          visible={modalVisible} 
-          onClose={() => setModalVisible(false)} 
-          onSave={handleSaveWeight} 
-          weight={weight} 
-          setWeight={setWeight} 
-          notes={notes} 
-          setNotes={setNotes} 
-          dateTime={dateTime} 
-          setDateTime={setDateTime} 
-        />
+        <View style={{backgroundColor: '#1C1C1E', padding: 10}}>
+          <WhiteTextButtonNew text={'Add entry'} onPress={() => setModalVisible(true)} />
+          <NewEntryModal 
+            visible={modalVisible} 
+            onClose={() => setModalVisible(false)} 
+            onSave={handleSaveWeight} 
+            weight={weight} 
+            setWeight={setWeight} 
+            notes={notes} 
+            setNotes={setNotes} 
+            dateTime={dateTime} 
+            setDateTime={setDateTime} 
+          />
       </View>
     </View>
   );
