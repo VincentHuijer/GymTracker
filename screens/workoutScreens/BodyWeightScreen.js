@@ -14,7 +14,7 @@ const BodyWeightScreen = () => {
   const { session } = useContext(SessionContext);
   const [weight, setWeight] = useState('');
   const [notes, setNotes] = useState('');
-  const [dateTime, setDateTime] = useState(moment().format('YYYY-MM-DD HH:MM:ss'));
+  const [dateTime, setDateTime] = useState(moment().format('YYYY-MM-DD HH:mm:ss'));
   const [monthlyData, setMonthlyData] = useState([]);
   const [visibleEntries, setVisibleEntries] = useState({});
   const [newEntryModalVisible, setNewEntryModalVisible] = useState(false);
@@ -179,13 +179,17 @@ const BodyWeightScreen = () => {
                         </Text>
                       )}
                       <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
-                      <TouchableOpacity onPress={() => setEditingEntryIndex(index)}>
+                      <TouchableOpacity onPress={() => {
+
+                        setEditingEntryIndex(index);
+                        setEditEntryModalVisible(true);
+                      }}>
                         <PencilIcon/>
                       </TouchableOpacity>
                         {editingEntryIndex === index && (
                           <EditEntryModal
-                            visible={true}
-                            onClose={() => setEditEntryModalVisible(null)}
+                            visible={EditEntryModalVisible}
+                            onClose={() => setEditEntryModalVisible(false)}
                             entry={entry}
                             onEdit={handleEditWeight}
                             onRemove={handleRemoveWeightEntry}
