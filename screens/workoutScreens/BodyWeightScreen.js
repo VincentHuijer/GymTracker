@@ -18,6 +18,7 @@ const BodyWeightScreen = () => {
   const [monthlyData, setMonthlyData] = useState([]);
   const [visibleEntries, setVisibleEntries] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
+  const [editingEntryIndex, setEditingEntryIndex] = useState(null);
 
   useEffect(() => { //show/hide months with chevron
     const initialVisibility = {};
@@ -83,7 +84,14 @@ const BodyWeightScreen = () => {
     return formattedData;
   };
 
-  const handle
+  const handleEditWeight = async () => {
+
+  }
+
+  const handleRemoveWeightEntry = async () => {
+
+
+  }
 
   const handleSaveWeight = async () => {
    
@@ -134,7 +142,7 @@ const BodyWeightScreen = () => {
                   alignItems: 'center',
                 }}
               >
-                <Text style={{ fontSize: 24, color: 'white' }}>{monthData.month}</Text>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>{monthData.month}</Text>
                 <Text style={{ fontSize: 24, color: parseFloat(monthData.weightDifference) < 0 ? '#5BE432' : '#E43D32', marginLeft: 10 }}>
                   {`${monthData.weightDifference.toFixed(1)}kg`}
                 </Text>
@@ -154,9 +162,9 @@ const BodyWeightScreen = () => {
                         flexDirection: 'row',
                         justifyContent: 'space-evenly',
                         alignItems: 'center',
-                        paddingVertical: 10,
+                        paddingVertical: 14,
                       }}>
-                      <Text style={{ fontSize: 20, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         {entry.notes ? <FileTextIcon /> : <View style={{ width: 24 }} />}
                       </View>
@@ -170,15 +178,18 @@ const BodyWeightScreen = () => {
                         </Text>
                       )}
                       <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
-                      <PencilIcon onPress={() => setModalVisible(true)}/>
-                      <EditEntryModal
-                        visible={modalVisible}
-                        onClose={() => setModalVisible(false)}
-                        entry={entry}
-                        onEdit={handleEditWeight}
-                        onRemove={handleRemoveWeightEntry}
-                      >
-                      </EditEntryModal>
+                      <TouchableOpacity key={index}>
+                        <PencilIcon onPress={() => setEditingEntryIndex(index)} />
+                        {editingEntryIndex === index && (
+                          <EditEntryxModal
+                            visible={modalVisible}
+                            onClose={() => setModalVisible(false)}
+                            entry={entry}
+                            onEdit={handleEditWeight}
+                            onRemove={handleRemoveWeightEntry}
+                          />
+                        )}
+                      </TouchableOpacity>
                     </View>
                     {index !== monthData.entries.length - 1 && <ThinLine />}
                   </View>

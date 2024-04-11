@@ -37,6 +37,7 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
         <Button title="Edit" onPress={handleEdit} />
         <Button title="Remove" onPress={handleRemove} />
         <Button title="Cancel" onPress={onClose} />
+        <Text> I AM AN EDIT MODAL, I AM AN EDIT MODAL III AAAAM AN EDIT MODAL</Text>
       </View>
     </Modal>
   );
