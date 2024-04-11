@@ -4,9 +4,9 @@ import WhiteTextButtonNew from './WhiteTextButtonNew';
 import moment from 'moment';
 
 const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
-  const [editedWeight, setEditedWeight] = useState(entry.weight.toString());
-  const [editedNotes, setEditedNotes] = useState(entry.notes);
-  const [recorded_At, setRecorded_At] = useState(moment(entry.recorded_at).format('YYYY-MM-DD HH:mm:ss'));
+  const [editedWeight, setEditedWeight] = useState(entry?.weight.toString());
+  const [editedNotes, setEditedNotes] = useState(entry?.notes);
+  const [recorded_At, setRecorded_At] = useState(moment(entry?.recorded_at).format('YYYY-MM-DD HH:mm:ss'));
 
   const handleEdit = () => {
     onEdit({
@@ -22,6 +22,7 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
     onRemove(entry.id);
     onClose();
   };
+  
 
   return (
     <Modal visible={visible} onRequestClose={onClose} animationType="slide">

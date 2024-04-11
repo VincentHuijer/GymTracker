@@ -20,6 +20,8 @@ const BodyWeightScreen = () => {
   const [newEntryModalVisible, setNewEntryModalVisible] = useState(false);
   const [EditEntryModalVisible, setEditEntryModalVisible] = useState(false);
 
+  const [selectedEntry, setSelectedEntry] = useState(null);
+
   useEffect(() => { //show/hide months with chevron
     const initialVisibility = {};
     monthlyData.forEach((monthData) => {
@@ -35,6 +37,12 @@ const BodyWeightScreen = () => {
     }));
   };
 
+  useEffect(() => {
+    if (selectedEntry) {
+      setEditEntryModalVisible(true);
+    }
+  }, [selectedEntry]);
+  
 
   useEffect(() => {
     fetchData();
@@ -180,19 +188,20 @@ const BodyWeightScreen = () => {
                       <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
                       <TouchableOpacity 
                         onPress={() => {
-                          setEditEntryModalVisible(true);
-                          console.log(entry)
+                          setSelectedEntry(entry);
                         }}
                       >
-                      <PencilIcon/>
+                        <PencilIcon/>
                       </TouchableOpacity>
+                      {selectedEntry && 
                       <EditEntryModal
+                        entry={selectedEntry}
                         visible={EditEntryModalVisible}
                         onClose={() => setEditEntryModalVisible(false)}
-                        entry={entry}
                         onEdit={handleEditWeight}
                         onRemove={handleRemoveWeightEntry}
                       />
+                    }
                     </View>
                     {index !== monthData.entries.length - 1 && <ThinLine />}
                   </View>
