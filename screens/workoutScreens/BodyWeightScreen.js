@@ -17,7 +17,8 @@ const BodyWeightScreen = () => {
   const [dateTime, setDateTime] = useState(moment().format('YYYY-MM-DD HH:MM:ss'));
   const [monthlyData, setMonthlyData] = useState([]);
   const [visibleEntries, setVisibleEntries] = useState({});
-  const [modalVisible, setModalVisible] = useState(false);
+  const [newEntryModalVisible, setNewEntryModalVisible] = useState(false);
+  const [EditEntryModalVisible, setEditEntryModalVisible] = useState(false);
   const [editingEntryIndex, setEditingEntryIndex] = useState(null);
 
   useEffect(() => { //show/hide months with chevron
@@ -121,7 +122,7 @@ const BodyWeightScreen = () => {
         setNotes('');
         setDateTime('');
         fetchData();
-        setModalVisible(false);
+        setNewEntryModalVisible(false);
       }
     } catch (error) {
       console.error('Error saving weight:', error.message);
@@ -178,18 +179,18 @@ const BodyWeightScreen = () => {
                         </Text>
                       )}
                       <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
-                      <TouchableOpacity key={index}>
-                        <PencilIcon onPress={() => setEditingEntryIndex(index)} />
+                      <TouchableOpacity onPress={() => setEditingEntryIndex(index)}>
+                        <PencilIcon/>
+                      </TouchableOpacity>
                         {editingEntryIndex === index && (
-                          <EditEntryxModal
-                            visible={modalVisible}
-                            onClose={() => setModalVisible(false)}
+                          <EditEntryModal
+                            visible={true}
+                            onClose={() => setEditEntryModalVisible(null)}
                             entry={entry}
                             onEdit={handleEditWeight}
                             onRemove={handleRemoveWeightEntry}
                           />
                         )}
-                      </TouchableOpacity>
                     </View>
                     {index !== monthData.entries.length - 1 && <ThinLine />}
                   </View>
@@ -201,10 +202,10 @@ const BodyWeightScreen = () => {
         </View>
       </ScrollView>
         <View style={{backgroundColor: '#1C1C1E', padding: 10}}>
-          <WhiteTextButtonNew text={'Add entry'} onPress={() => setModalVisible(true)} />
+          <WhiteTextButtonNew text={'Add entry'} onPress={() => setNewEntryModalVisible(true)} />
           <NewEntryModal 
-            visible={modalVisible} 
-            onClose={() => setModalVisible(false)} 
+            visible={newEntryModalVisible} 
+            onClose={() => setNewEntryModalVisible(false)} 
             onSave={handleSaveWeight} 
             weight={weight} 
             setWeight={setWeight} 
