@@ -8,6 +8,7 @@ import ThinLine from '../../components/ThinLine';
 import { ChevronDown, ChevronUp, FileTextIcon, PencilIcon } from '../../assets/SvgIcons';
 import WhiteTextButtonNew from '../../components/WhiteTextButtonNew';
 import NewEntryModal from '../../components/NewEntryModal';
+import EditEntryModal from '../../components/EditEntryModal';
 
 const BodyWeightScreen = () => {
   const { session } = useContext(SessionContext);
@@ -81,6 +82,8 @@ const BodyWeightScreen = () => {
 
     return formattedData;
   };
+
+  const handle
 
   const handleSaveWeight = async () => {
    
@@ -167,7 +170,15 @@ const BodyWeightScreen = () => {
                         </Text>
                       )}
                       <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
-                      <PencilIcon />
+                      <PencilIcon onPress={() => setModalVisible(true)}/>
+                      <EditEntryModal
+                        visible={modalVisible}
+                        onClose={() => setModalVisible(false)}
+                        entry={entry}
+                        onEdit={handleEditWeight}
+                        onRemove={handleRemoveWeightEntry}
+                      >
+                      </EditEntryModal>
                     </View>
                     {index !== monthData.entries.length - 1 && <ThinLine />}
                   </View>
