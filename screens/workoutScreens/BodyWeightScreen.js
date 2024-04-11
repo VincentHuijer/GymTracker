@@ -19,7 +19,6 @@ const BodyWeightScreen = () => {
   const [visibleEntries, setVisibleEntries] = useState({});
   const [newEntryModalVisible, setNewEntryModalVisible] = useState(false);
   const [EditEntryModalVisible, setEditEntryModalVisible] = useState(false);
-  const [editingEntryIndex, setEditingEntryIndex] = useState(null);
 
   useEffect(() => { //show/hide months with chevron
     const initialVisibility = {};
@@ -179,22 +178,21 @@ const BodyWeightScreen = () => {
                         </Text>
                       )}
                       <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
-                      <TouchableOpacity onPress={() => {
-
-                        setEditingEntryIndex(index);
-                        setEditEntryModalVisible(true);
-                      }}>
-                        <PencilIcon/>
+                      <TouchableOpacity 
+                        onPress={() => {
+                          setEditEntryModalVisible(true);
+                          console.log(entry)
+                        }}
+                      >
+                      <PencilIcon/>
                       </TouchableOpacity>
-                        {editingEntryIndex === index && (
-                          <EditEntryModal
-                            visible={EditEntryModalVisible}
-                            onClose={() => setEditEntryModalVisible(false)}
-                            entry={entry}
-                            onEdit={handleEditWeight}
-                            onRemove={handleRemoveWeightEntry}
-                          />
-                        )}
+                      <EditEntryModal
+                        visible={EditEntryModalVisible}
+                        onClose={() => setEditEntryModalVisible(false)}
+                        entry={entry}
+                        onEdit={handleEditWeight}
+                        onRemove={handleRemoveWeightEntry}
+                      />
                     </View>
                     {index !== monthData.entries.length - 1 && <ThinLine />}
                   </View>

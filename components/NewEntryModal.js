@@ -24,7 +24,7 @@ const NewEntryModal = ({ visible, onClose, onSave, weight, setWeight, notes, set
           onChangeText={setDateTime} 
           placeholder="Enter date & time" 
           style={{ padding: 10, fontSize: 30, backgroundColor: 'grey', marginTop: 10 }}
-          editable={false}
+          editable={false} //no longer editable after feedback
         />
         <WhiteTextButtonNew 
           text={'save weight'} 
