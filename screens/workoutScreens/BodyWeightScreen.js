@@ -183,6 +183,7 @@ const BodyWeightScreen = () => {
                           marginLeft: 10 
                         }}>
                           {`${(parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)).toFixed(1)}kg`}
+                          {/* doesn't accept 0.0 or something empty when there is nothing to compare with (empty space) */}
                         </Text>
                       )}
                       <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
