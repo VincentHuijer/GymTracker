@@ -172,7 +172,7 @@ const BodyWeightScreen = () => {
                         alignItems: 'center',
                         paddingVertical: 14,
                       }}>
-                      <Text style={{ fontSize: 16, color: 'white' }}>{moment(entry.recorded_at).format('D/M (ddd)')}</Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>{moment(entry.recorded_at).format('DD/MM (ddd)')}</Text>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         {entry.notes ? <FileTextIcon /> : <View style={{ width: 24 }} />}
                       </View>
