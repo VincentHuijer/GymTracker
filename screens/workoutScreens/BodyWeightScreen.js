@@ -198,7 +198,10 @@ const BodyWeightScreen = () => {
                       <EditEntryModal
                         entry={selectedEntry}
                         visible={EditEntryModalVisible}
-                        onClose={() => setEditEntryModalVisible(false)}
+                        onClose={() => {
+                          setEditEntryModalVisible(false);
+                          setSelectedEntry(null);
+                        }}
                         onEdit={handleEditWeight}
                         onRemove={handleRemoveWeightEntry}
                       />
