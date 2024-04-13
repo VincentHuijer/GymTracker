@@ -34,7 +34,7 @@ const NewEntryModal = ({ visible, onClose, onSave, weight, setWeight, notes, set
         <WhiteTextButtonNew 
           text={'Cancel'} 
           onPress={onClose} 
-          style={{ backgroundColor: '#E43D32', width: '85%', marginTop: 10 }}
+          style={{ backgroundColor: '#2CB3FC', width: '85%', marginTop: 10 }}
         />
       </View>
     </Modal>

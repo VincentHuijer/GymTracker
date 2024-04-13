@@ -92,14 +92,52 @@ const BodyWeightScreen = () => {
     return formattedData;
   };
 
-  const handleEditWeight = async () => {
-
-  }
-
-  const handleRemoveWeightEntry = async () => {
-
-
-  }
+  const handleEditWeight = async (updatedEntry) => {
+    try {
+      if (!session || !session.user) {
+        console.error('No user session found.');
+        return;
+      }
+  
+      const { data, error } = await supabase
+        .from('BodyWeightTracker')
+        .update(updatedEntry)
+        .match({ id: updatedEntry.id, userid: session.user.id });
+  
+      if (error) {
+        console.error('Error updating weight entry:', error.message);
+      } else {
+        console.log('Weight entry updated successfully:', data);
+        fetchData();
+      }
+    } catch (error) {
+      console.error('Error updating weight entry:', error.message);
+    }
+  };
+  
+  const handleRemoveWeightEntry = async (entryId) => {
+    try {
+      if (!session || !session.user) {
+        console.error('No user session found.');
+        return;
+      }
+  
+      const { data, error } = await supabase
+        .from('BodyWeightTracker')
+        .delete()
+        .match({ id: entryId, userid: session.user.id });
+  
+      if (error) {
+        console.error('Error removing weight entry:', error.message);
+      } else {
+        console.log('Weight entry removed successfully:', data);
+        fetchData();
+      }
+    } catch (error) {
+      console.error('Error removing weight entry:', error.message);
+    }
+  };
+  
 
   const handleSaveWeight = async () => {
    

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, View, TextInput, Button, Text } from 'react-native';
 import WhiteTextButtonNew from './WhiteTextButtonNew';
 import moment from 'moment';
@@ -7,15 +7,25 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
   const [editedWeight, setEditedWeight] = useState(entry.weight.toString());
   const [editedNotes, setEditedNotes] = useState(entry.notes);
   const [recorded_At, setRecorded_At] = useState(moment(entry.recorded_at).format('YYYY-MM-DD HH:mm:ss'));
+  const [editedEntry, setEditedEntry] = useState(false);
+  
+  useEffect(() => {
+    setEditedEntry(editedWeight !== entry.weight.toString() || editedNotes !== entry.notes);
+  }, [editedWeight, editedNotes, entry]);
+
 
   const handleEdit = () => {
-    onEdit({
-      ...entry,
-      weight: parseFloat(editedWeight),
-      notes: editedNotes,
-      dateTime: recorded_At
-    });
-    onClose();
+
+    if(editedEntry){
+      onEdit({
+        ...entry,
+        weight: parseFloat(editedWeight),
+        notes: editedNotes,
+        recorded_at: recorded_At
+      });
+      onClose();
+    }
+    else { console.log('no edits detected')}
   };
 
   const handleRemove = () => {
@@ -34,14 +44,20 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
         />
         <TextInput
           value={editedWeight}
-          onChangeText={setEditedWeight}
+          onChangeText={(text) => {
+            setEditedWeight(text);
+            setEditedEntry(text !== entry.weight.toString() || editedNotes !== entry.notes);
+          }}
           keyboardType="numeric"
           placeholder="Enter weight"
           style={{ padding: 10, fontSize: 30, backgroundColor: 'white', width: '85%', marginTop: 10 }}
         />
         <TextInput
           value={editedNotes}
-          onChangeText={setEditedNotes}
+          onChangeText={(text) => {
+            setEditedNotes(text);
+            setEditedEntry(editedWeight !== entry.weight.toString() || text !== entry.notes);
+          }}          
           placeholder="Enter notes"
           style={{ padding: 10, fontSize: 30, backgroundColor: 'white', width: '85%', marginTop: 10 }}
         />
@@ -55,7 +71,8 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
         <WhiteTextButtonNew 
           text={'Edit'} 
           onPress={handleEdit} 
-          style={{ backgroundColor: '#5BE432', width: '85%', marginTop: 10 }}
+          style={{ backgroundColor: editedEntry ? '#5BE432' : '#CCCCCC', width: '85%', marginTop: 10 }}
+          disabled={!editedEntry}
         />
         <WhiteTextButtonNew 
           text={'Remove'} 
@@ -65,7 +82,7 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
         <WhiteTextButtonNew 
           text={'Cancel'} 
           onPress={onClose} 
-          style={{ backgroundColor: '#CCCCCC', width: '85%', marginTop: 10 }}
+          style={{ backgroundColor: '#2CB3FC', width: '85%', marginTop: 10 }}
         />
       </View>
     </Modal>
