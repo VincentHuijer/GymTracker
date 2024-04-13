@@ -189,11 +189,11 @@ const BodyWeightScreen = () => {
                 }}
               >
                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>{monthData.month}</Text>
-                <Text style={{ fontSize: 24, color: parseFloat(monthData.weightDifference) < 0 ? '#5BE432' : '#E43D32', marginLeft: 10 }}>
+                <Text style={{ fontSize: 20, color: parseFloat(monthData.weightDifference) < 0 ? '#5BE432' : '#E43D32', fontWeight: 'bold', marginLeft: 10 }}>
                   {`${monthData.weightDifference.toFixed(1)}kg`}
                 </Text>
 
-                <Text style={{ fontSize: 24, color: 'white' }}>{`${monthData.lastWeight}kg`}</Text>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>{`${monthData.lastWeight}kg`}</Text>
                 <TouchableOpacity onPress={() => toggleVisibility(monthData.month)}>
                   {visibleEntries[monthData.month] ? <ChevronUp /> : <ChevronDown />}
                 </TouchableOpacity>
@@ -210,21 +210,26 @@ const BodyWeightScreen = () => {
                         alignItems: 'center',
                         paddingVertical: 14,
                       }}>
-                      <Text style={{ fontSize: 16, color: 'white' }}>{moment(entry.recorded_at).format('DD/MM (ddd)')}</Text>
+                      <Text style={{ fontSize: 16, color: 'white', width: 100 }}>{moment(entry.recorded_at).format('DD/MM (ddd)')}</Text>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         {entry.notes ? <FileTextIcon /> : <View style={{ width: 24 }} />}
                       </View>
-                      {index < monthData.entries.length - 1 && (
+                      {index < monthData.entries.length - 1 && monthData.entries[index + 1] ? (
                         <Text style={{ 
-                          fontSize: 20, 
+                          fontSize: 16, 
                           color: ((parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)) < 0) ? '#5BE432' : '#E43D32', 
-                          marginLeft: 10 
                         }}>
                           {`${(parseFloat(entry.weight) - parseFloat(monthData.entries[index + 1].weight)).toFixed(1)}kg`}
-                          {/* doesn't accept 0.0 or something empty when there is nothing to compare with (empty space) */}
+                        </Text>
+                      ) : (
+                        <Text style={{ 
+                          fontSize: 16, 
+                          color: '#E43D32',
+                        }}>
+                          0.0kg
                         </Text>
                       )}
-                      <Text style={{ fontSize: 20, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>{`${parseFloat(entry.weight).toFixed(1)}kg`}</Text>
                       <TouchableOpacity 
                         onPress={() => {
                           setSelectedEntry(entry);
