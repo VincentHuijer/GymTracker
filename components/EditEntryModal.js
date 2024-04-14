@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, View, TextInput, Text } from 'react-native';
+import { Modal, View} from 'react-native';
 import WhiteTextButtonNew from './WhiteTextButtonNew';
 import moment from 'moment';
 import { 
@@ -8,24 +8,10 @@ import {
   PageLogo, 
   PageTitle,
   SubTitle,
-  StyledFormArea,
-  LeftIcon,
-  StyledInputLabel,
-  StyledTextInput,
-  RightIcon,
-  StyledButton,
-  ButtonText,
   Colors,
-  MsgBox,
-  Line,
-  ExtraView,
-  ExtraText,
-  TextLinkContent,
-  TextLink
 } from './../components/styles';
 import { StatusBar } from "expo-status-bar";
-import { Button, Input } from 'react-native-elements'
-
+import { Input } from 'react-native-elements'
 const {brand, darkLight, primary, white} = Colors;
 
 const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
@@ -67,60 +53,58 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
           <PageLogo resizeMode="cover" source={require('./../assets/FitnessLogo.png')} style={{marginTop: 50, borderRadius: 200, borderWidth: 5, borderColor: 'white',}} />
           <PageTitle> MoggingFitness </PageTitle>
           <SubTitle> Edit Entry </SubTitle>
-          <View style={{ width: 80}}>
-            <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
-              <Input
-                value={editedWeight}
-                label="Enter Weight"
-                inputStyle={{ color: 'white' }}
-                onChangeText={(text) => {
-                  setEditedWeight(text);
-                  setEditedEntry(text !== entry.weight.toString() || editedNotes !== entry.notes);
-                }}     
-                placeholderTextColor={darkLight}
-              />
-            </View>
-            <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
-              <Input
-                value={editedNotes}
-                label="Enter Notes"
-                inputStyle={{ color: 'white' }}
-                onChangeText={(text) => {
-                  setEditedNotes(text);
-                  setEditedEntry(editedWeight !== entry.weight.toString() || text !== entry.notes);
-                }}          
-                placeholder="Enter notes"
-                placeholderTextColor={darkLight}
-              />
-            </View>
-            <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
-              <Input
-                value={recorded_At}
-                label="recorded at"
-                inputStyle={{ color: 'white' }}
-                onChangeText={setRecorded_At} 
-                placeholder="Enter date & time"
-                editable={false}
-                style={{ color: 'grey' }}
-              />
-            </View>
-            <WhiteTextButtonNew 
-              text={'Edit'} 
-              onPress={handleEdit} 
-              style={{ backgroundColor: editedEntry ? '#5BE432' : '#CCCCCC', width: '100%', marginTop: 10, borderRadius: 3 }}
-              disabled={!editedEntry}
-            />
-            <WhiteTextButtonNew 
-              text={'Remove'} 
-              onPress={handleRemove} 
-              style={{ backgroundColor: '#E43D32', width: '100%', marginTop: 10, borderRadius: 3 }}
-            />
-            <WhiteTextButtonNew 
-              text={'Cancel'} 
-              onPress={onClose} 
-              style={{ backgroundColor: '#2CB3FC', width: '100%', marginTop: 10, borderRadius: 3 }}
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              value={editedWeight}
+              label="Enter Weight"
+              inputStyle={{ color: 'white' }}
+              onChangeText={(text) => {
+                setEditedWeight(text);
+                setEditedEntry(text !== entry.weight.toString() || editedNotes !== entry.notes);
+              }}     
+              placeholderTextColor={darkLight}
             />
           </View>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              value={editedNotes}
+              label="Enter Notes"
+              inputStyle={{ color: 'white' }}
+              onChangeText={(text) => {
+                setEditedNotes(text);
+                setEditedEntry(editedWeight !== entry.weight.toString() || text !== entry.notes);
+              }}          
+              placeholder="Enter notes"
+              placeholderTextColor={darkLight}
+            />
+          </View>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              value={recorded_At}
+              label="recorded at"
+              inputStyle={{ color: 'white' }}
+              onChangeText={setRecorded_At} 
+              placeholder="Enter date & time"
+              editable={false}
+              style={{ color: 'grey' }}
+            />
+          </View>
+          <WhiteTextButtonNew 
+            text={'Edit'} 
+            onPress={handleEdit} 
+            style={{ backgroundColor: editedEntry ? '#5BE432' : '#CCCCCC', width: '100%', marginTop: 10, borderRadius: 3 }}
+            disabled={!editedEntry}
+          />
+          <WhiteTextButtonNew 
+            text={'Remove'} 
+            onPress={handleRemove} 
+            style={{ backgroundColor: '#E43D32', width: '100%', marginTop: 10, borderRadius: 3 }}
+          />
+          <WhiteTextButtonNew 
+            text={'Cancel'} 
+            onPress={onClose} 
+            style={{ backgroundColor: '#2CB3FC', width: '100%', marginTop: 10, borderRadius: 3 }}
+          />
         </InnerContainer>
       </StyledContainer>
     </Modal>
