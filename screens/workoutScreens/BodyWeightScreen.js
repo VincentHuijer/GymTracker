@@ -147,7 +147,7 @@ const BodyWeightScreen = () => {
         return;
       }
 
-      const formattedDateTime = moment(dateTime).format('YYYY-MM-DD HH:mm');
+      const formattedDateTime = moment(dateTime).format('YYYY-MM-DD HH:mm:ss');
       const { data, error } = await supabase
         .from('BodyWeightTracker')
         .insert([
@@ -165,7 +165,7 @@ const BodyWeightScreen = () => {
         console.log('Weight saved successfully:', data);
         setWeight('');
         setNotes('');
-        setDateTime('');
+        // setDateTime('');
         fetchData();
         setNewEntryModalVisible(false);
       }

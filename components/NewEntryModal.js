@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, View } from 'react-native';
 import WhiteTextButtonNew from './WhiteTextButtonNew';
 import { 
@@ -13,7 +13,22 @@ import { StatusBar } from "expo-status-bar";
 import { Input } from 'react-native-elements'
 const {darkLight} = Colors;
 
+
+
 const NewEntryModal = ({ visible, onClose, onSave, weight, setWeight, notes, setNotes, dateTime, setDateTime }) => {
+  const [newEntry, setNewEntry] = useState(false);
+
+  const handleSave = () => {
+    if (weight !== ''){
+      onSave({
+        weight: parseFloat(weight),
+        notes: this.notes
+      });
+      onClose();
+    }
+    else { console.log('missing weight input', weight)}
+  }
+
   return (
     <Modal visible={visible} onRequestClose={onClose} animationType="slide">
       <StyledContainer>
@@ -61,8 +76,9 @@ const NewEntryModal = ({ visible, onClose, onSave, weight, setWeight, notes, set
           </View>
           <WhiteTextButtonNew 
             text={'save weight'} 
-            onPress={onSave} 
-            style={{ backgroundColor: '#5BE432', width: '100%', marginTop: 10, borderRadius: 3 }}
+            onPress={handleSave} 
+            style={{ backgroundColor: weight === '' ? '#CCCCCC' : '#5BE432', width: '100%', marginTop: 10, borderRadius: 3 }}
+            disabled={!weight}
           />
           <WhiteTextButtonNew 
             text={'Cancel'} 

@@ -26,7 +26,6 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
 
 
   const handleEdit = () => {
-
     if(editedEntry){
       onEdit({
         ...entry,
