@@ -12,7 +12,7 @@ import {
 } from './../components/styles';
 import { StatusBar } from "expo-status-bar";
 import { Input } from 'react-native-elements'
-const {brand, darkLight, primary, white} = Colors;
+const {darkLight} = Colors;
 
 const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
   const [editedWeight, setEditedWeight] = useState(entry.weight.toString());

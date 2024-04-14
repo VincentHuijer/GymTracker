@@ -1,42 +1,73 @@
 import React from 'react';
-import { Modal, View, TextInput, Button } from 'react-native';
+import { Modal, View } from 'react-native';
 import WhiteTextButtonNew from './WhiteTextButtonNew';
+import { 
+  StyledContainer, 
+  InnerContainer, 
+  PageLogo, 
+  PageTitle,
+  SubTitle,
+  Colors,
+} from './../components/styles';
+import { StatusBar } from "expo-status-bar";
+import { Input } from 'react-native-elements'
+const {darkLight} = Colors;
 
 const NewEntryModal = ({ visible, onClose, onSave, weight, setWeight, notes, setNotes, dateTime, setDateTime }) => {
   return (
     <Modal visible={visible} onRequestClose={onClose} animationType="slide">
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#1C1C1E" }}>
-        <TextInput 
-          value={weight} 
-          onChangeText={setWeight} 
-          keyboardType="number-pad" 
-          placeholder="Enter weight" 
-          style={{ padding: 10, fontSize: 30, backgroundColor: 'white' }}
-        />
-        <TextInput 
-          value={notes}
-          onChangeText={setNotes} 
-          placeholder="Enter notes" 
-          style={{ padding: 10, fontSize: 30, backgroundColor: 'white', marginTop: 10 }}
-        />
-        <TextInput 
-          value={dateTime} 
-          onChangeText={setDateTime} 
-          placeholder="Enter date & time" 
-          style={{ padding: 10, fontSize: 30, backgroundColor: 'grey', marginTop: 10 }}
-          editable={false} //no longer editable after feedback
-        />
-        <WhiteTextButtonNew 
-          text={'save weight'} 
-          onPress={onSave} 
-          style={{ backgroundColor: '#5BE432', width: '85%', marginTop: 10 }}
-        />
-        <WhiteTextButtonNew 
-          text={'Cancel'} 
-          onPress={onClose} 
-          style={{ backgroundColor: '#2CB3FC', width: '85%', marginTop: 10 }}
-        />
-      </View>
+      <StyledContainer>
+        <StatusBar style="dark"/>
+        <InnerContainer>
+          <PageLogo resizeMode="cover" source={require('./../assets/FitnessLogo.png')} style={{marginTop: 50, borderRadius: 200, borderWidth: 5, borderColor: 'white',}} />
+          <PageTitle> MoggingFitness </PageTitle>
+          <SubTitle> New Entry </SubTitle>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              value={weight}
+              label="Enter Weight"
+              inputStyle={{ color: 'white' }}
+              onChangeText={setWeight} 
+              keyboardType="number-pad" 
+              placeholder="Enter weight"  
+              placeholderTextColor={darkLight}
+            />
+          </View>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              value={notes}
+              label="Enter notes"
+              inputStyle={{ color: 'white' }}
+              onChangeText={setNotes} 
+              keyboardType="number-pad" 
+              placeholder="Enter notes" 
+              placeholderTextColor={darkLight}
+            />
+          </View>
+          <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
+            <Input
+              value={dateTime}
+              label="dateTime"
+              inputStyle={{ color: 'grey' }}
+              onChangeText={setDateTime} 
+              keyboardType="number-pad" 
+              placeholder="Enter date & time" 
+              placeholderTextColor={darkLight}
+              editable={false}
+            />
+          </View>
+          <WhiteTextButtonNew 
+            text={'save weight'} 
+            onPress={onSave} 
+            style={{ backgroundColor: '#5BE432', width: '100%', marginTop: 10, borderRadius: 3 }}
+          />
+          <WhiteTextButtonNew 
+            text={'Cancel'} 
+            onPress={onClose} 
+            style={{ backgroundColor: '#2CB3FC', width: '100%', marginTop: 10, borderRadius: 3 }}
+          />
+        </InnerContainer>
+      </StyledContainer>
     </Modal>
   );
 };
