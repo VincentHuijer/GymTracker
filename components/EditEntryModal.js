@@ -17,7 +17,7 @@ const {darkLight} = Colors;
 const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
   const [editedWeight, setEditedWeight] = useState(entry.weight.toString());
   const [editedNotes, setEditedNotes] = useState(entry.notes);
-  const [recorded_At, setRecorded_At] = useState(moment(entry.recorded_at).format('YYYY-MM-DD HH:mm:ss'));
+  const [recorded_At] = useState(moment(entry.recorded_at).local().format('YYYY-MM-DD HH:mm'));
   const [editedEntry, setEditedEntry] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,6 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
         ...entry,
         weight: parseFloat(editedWeight),
         notes: editedNotes,
-        recorded_at: recorded_At
       });
       onClose();
     }
@@ -59,7 +58,8 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
               label="Enter Weight"
               inputStyle={{ color: 'white' }}
               onChangeText={(text) => {
-                setEditedWeight(text);
+                const numericValue = text.replace(/[^0-9.]/g, "")
+                setEditedWeight(numericValue);
                 setEditedEntry(text !== entry.weight.toString() || editedNotes !== entry.notes);
               }}     
               placeholderTextColor={darkLight}
@@ -83,7 +83,6 @@ const EditEntryModal = ({ visible, onClose, entry, onEdit, onRemove }) => {
               value={recorded_At}
               label="recorded at"
               inputStyle={{ color: 'white' }}
-              onChangeText={setRecorded_At} 
               placeholder="Enter date & time"
               editable={false}
               style={{ color: 'grey' }}

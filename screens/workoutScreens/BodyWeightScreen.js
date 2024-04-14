@@ -14,7 +14,7 @@ const BodyWeightScreen = () => {
   const { session } = useContext(SessionContext);
   const [weight, setWeight] = useState('');
   const [notes, setNotes] = useState('');
-  const [dateTime, setDateTime] = useState(moment().format('YYYY-MM-DD HH:mm:ss'));
+  const [dateTime, setDateTime] = useState(moment().format('YYYY-MM-DD HH:mm'));
   const [monthlyData, setMonthlyData] = useState([]);
   const [visibleEntries, setVisibleEntries] = useState({});
   const [newEntryModalVisible, setNewEntryModalVisible] = useState(false);
@@ -147,7 +147,7 @@ const BodyWeightScreen = () => {
         return;
       }
 
-      const formattedDateTime = moment(dateTime).format('YYYY-MM-DD HH:mm:ss');
+      const formattedDateTime = moment(dateTime).format('YYYY-MM-DD HH:mm');
       const { data, error } = await supabase
         .from('BodyWeightTracker')
         .insert([
@@ -270,7 +270,6 @@ const BodyWeightScreen = () => {
             notes={notes} 
             setNotes={setNotes} 
             dateTime={dateTime} 
-            setDateTime={setDateTime} 
           />
       </View>
     </View>

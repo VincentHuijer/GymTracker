@@ -27,10 +27,13 @@ const NewEntryModal = ({ visible, onClose, onSave, weight, setWeight, notes, set
               value={weight}
               label="Enter Weight"
               inputStyle={{ color: 'white' }}
-              onChangeText={setWeight} 
-              keyboardType="number-pad" 
+              onChangeText={(text) => {
+                const numericValue = text.replace(/[^0-9.]/g, "")
+                setWeight(numericValue);
+              }} 
               placeholder="Enter weight"  
               placeholderTextColor={darkLight}
+              keyboardType="numeric" 
             />
           </View>
           <View style={{ paddingTop: 4, paddingBottom: 4, alignSelf: 'stretch', marginTop: 20 }}>
