@@ -188,12 +188,12 @@ const BodyWeightScreen = () => {
                   alignItems: 'center',
                 }}
               >
-                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>{monthData.month}</Text>
-                <Text style={{ fontSize: 20, color: parseFloat(monthData.weightDifference) < 0 ? '#5BE432' : '#E43D32', fontWeight: 'bold', marginLeft: 10 }}>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', marginRight: 97 }}>{monthData.month}</Text>
+                <Text style={{ fontSize: 20, color: parseFloat(monthData.weightDifference) < 0 ? '#5BE432' : '#E43D32', fontWeight: 'bold', width: 60}}>
                   {`${monthData.weightDifference.toFixed(1)}kg`}
                 </Text>
 
-                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>{`${monthData.lastWeight}kg`}</Text>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>{`${monthData.lastWeight.toFixed(1)}kg`}</Text>
                 <TouchableOpacity onPress={() => toggleVisibility(monthData.month)}>
                   {visibleEntries[monthData.month] ? <ChevronUp /> : <ChevronDown />}
                 </TouchableOpacity>
@@ -243,7 +243,7 @@ const BodyWeightScreen = () => {
                         visible={EditEntryModalVisible}
                         onClose={() => {
                           setEditEntryModalVisible(false);
-                          setSelectedEntry(null); {/*NEEDS TO BE APPLIED ON EACH ONCLOSE FOR EDITING */}
+                          setSelectedEntry(null);
                         }}
                         onEdit={handleEditWeight}
                         onRemove={handleRemoveWeightEntry}
